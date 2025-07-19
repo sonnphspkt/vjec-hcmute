@@ -22,6 +22,12 @@ export default function Navbar() {
             <Link href="/jobs" className="text-gray-700 hover:text-blue-600 font-medium">
               Việc làm
             </Link>
+            <Link href="/student" className="text-gray-700 hover:text-blue-600 font-medium">
+              Sinh viên
+            </Link>
+            <Link href="/admin" className="text-gray-700 hover:text-blue-600 font-medium">
+              Admin
+            </Link>
             <div className="relative group">
               <button className="text-gray-700 hover:text-blue-600 font-medium flex items-center">
                 Quốc tế
