@@ -1,0 +1,103 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+// Enums
+enum Role {
+  STUDENT
+  EMPLOYER
+  ADMIN
+}
+
+enum JobType {
+  FULLTIME
+  PARTTIME
+  INTERNSHIP
+  REMOTE
+}
+
+enum PaymentStatus {
+  PENDING
+  SUCCESS
+  FAILED
+}
+
+// Models
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  fullName  String
+  role      Role
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  studentProfile  StudentProfile?
+  employerProfile EmployerProfile?
+
+  @@map("users")
+}
+
+model StudentProfile {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  major     String?
+  skills    String // JSON string array
+  resumeUrl String?
+  
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("student_profiles")
+}
+
+model EmployerProfile {
+  id       String  @id @default(cuid())
+  userId   String  @unique
+  company  String
+  verified Boolean @default(false)
+
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  jobPosts JobPost[]
+
+  @@map("employer_profiles")
+}
+
+model JobPost {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  salary      String
+  country     String
+  jobType     JobType
+  category    String
+  skills      String // JSON string array
+  employerId  String
+  approved    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  employer EmployerProfile @relation(fields: [employerId], references: [id], onDelete: Cascade)
+  payments Payment[]
+
+  @@map("job_posts")
+}
+
+model Payment {
+  id        String        @id @default(cuid())
+  jobPostId String
+  amount    Int
+  status    PaymentStatus @default(PENDING)
+  createdAt DateTime      @default(now())
+
+  jobPost JobPost @relation(fields: [jobPostId], references: [id], onDelete: Cascade)
+
+  @@map("payments")
+}
