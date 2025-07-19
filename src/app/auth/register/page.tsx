@@ -53,7 +53,8 @@ export default function RegisterPage() {
       
       alert('Đăng ký thành công! Vui lòng đăng nhập.')
       // TODO: Redirect to login
-    } catch (error) {
+    } catch (err) {
+      console.error('Registration error:', err)
       setErrors({ general: 'Có lỗi xảy ra. Vui lòng thử lại.' })
     } finally {
       setIsLoading(false)

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Search, Briefcase, GraduationCap, Globe, TrendingUp, Users, Building2 } from 'lucide-react'
+import { Search, Briefcase, GraduationCap, TrendingUp } from 'lucide-react'
 
 export default function Home() {
   return (

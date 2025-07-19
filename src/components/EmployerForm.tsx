@@ -74,7 +74,8 @@ export default function EmployerForm() {
       
       // TODO: Redirect to payment page
       alert('Bài đăng đã được tạo! Vui lòng thanh toán để kích hoạt.')
-    } catch (error) {
+    } catch (err) {
+      console.error('Error submitting job:', err)
       setErrors({ general: 'Có lỗi xảy ra. Vui lòng thử lại.' })
     } finally {
       setIsLoading(false)
@@ -132,7 +133,7 @@ export default function EmployerForm() {
               id="jobType"
               className="w-full px-3 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
               value={formData.jobType}
-              onChange={(e) => setFormData({ ...formData, jobType: e.target.value as any })}
+              onChange={(e) => setFormData({ ...formData, jobType: e.target.value as 'FULLTIME' | 'PARTTIME' | 'INTERNSHIP' | 'REMOTE' })}
             >
               <option value="FULLTIME">Toàn thời gian</option>
               <option value="PARTTIME">Bán thời gian</option>

@@ -46,6 +46,7 @@ export async function validateUser(email: string, password: string) {
   }
 
   // Loại bỏ password khỏi response
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { password: _, ...userWithoutPassword } = user
   return userWithoutPassword
 }

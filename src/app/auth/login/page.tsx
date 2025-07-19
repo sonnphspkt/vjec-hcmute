@@ -38,7 +38,8 @@ export default function LoginPage() {
       
       // TODO: Redirect to dashboard based on user role
       alert('Đăng nhập thành công!')
-    } catch (error) {
+    } catch (err) {
+      console.error('Login error:', err)
       setErrors({ general: 'Có lỗi xảy ra. Vui lòng thử lại.' })
     } finally {
       setIsLoading(false)

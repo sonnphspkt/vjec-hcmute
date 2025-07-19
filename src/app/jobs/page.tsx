@@ -1,6 +1,6 @@
 import { Suspense } from 'react'
 import JobCard from '@/components/JobCard'
-import { Search, Filter, MapPin, Briefcase } from 'lucide-react'
+import { Search, Filter } from 'lucide-react'
 
 // Mock data for demonstration
 const mockJobs = [

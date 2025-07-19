@@ -1,5 +1,5 @@
 import EmployerForm from '@/components/EmployerForm'
-import { Briefcase, Eye, DollarSign, Clock, Plus } from 'lucide-react'
+import { Briefcase, Eye, Clock, Plus } from 'lucide-react'
 
 // Mock data for demonstration
 const mockStats = {
@@ -39,7 +39,7 @@ const mockRecentJobs = [
 function StatsCard({ title, value, icon: Icon, color }: {
   title: string
   value: number
-  icon: any
+  icon: React.ComponentType<{ className?: string }>
   color: string
 }) {
   return (

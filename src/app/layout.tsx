@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Image from "next/image";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import HeaderBanner from "@/components/HeaderBanner";
@@ -22,8 +23,8 @@ function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-3 mb-4">
-              <img src="/logo-vjec.png" alt="VJEC Logo" className="h-8 w-auto" />
-              <img src="/hcmute-logo.png" alt="HCMUTE Logo" className="h-8 w-auto" />
+              <Image src="/logo-vjec.png" alt="VJEC Logo" width={32} height={32} className="h-8 w-auto" />
+              <Image src="/hcmute-logo.png" alt="HCMUTE Logo" width={32} height={32} className="h-8 w-auto" />
               <h3 className="text-2xl font-bold">VJEC-HCMUTE</h3>
             </div>
             <p className="text-gray-300 mb-4">
