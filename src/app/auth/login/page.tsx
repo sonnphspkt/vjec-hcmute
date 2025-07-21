@@ -1,10 +1,12 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import Link from 'next/link'
-import { Eye, EyeOff, Mail, Lock } from 'lucide-react'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { Eye, EyeOff, Mail, Lock, AlertCircle } from 'lucide-react'
+import { authenticateAndSetSession, isAdmin, isEmployer } from '@/lib/auth'
 
-export default function LoginPage() {
+function LoginForm() {
   const [showPassword, setShowPassword] = useState(false)
   const [formData, setFormData] = useState({
     email: '',
@@ -12,11 +14,24 @@ export default function LoginPage() {
   })
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [isLoading, setIsLoading] = useState(false)
+  const [message, setMessage] = useState('')
+  
+  const router = useRouter()
+  const searchParams = useSearchParams()
+
+  useEffect(() => {
+    // Lấy message từ URL params (khi redirect từ admin protection)
+    const urlMessage = searchParams.get('message')
+    if (urlMessage) {
+      setMessage(urlMessage)
+    }
+  }, [searchParams])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
     setErrors({})
+    setMessage('')
 
     // Basic validation
     const newErrors: Record<string, string> = {}
@@ -30,17 +45,25 @@ export default function LoginPage() {
     }
 
     try {
-      // TODO: Implement actual login logic
-      console.log('Login attempt:', formData)
+      // Thực hiện đăng nhập
+      const user = await authenticateAndSetSession(formData.email, formData.password)
       
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      
-      // TODO: Redirect to dashboard based on user role
-      alert('Đăng nhập thành công!')
+      if (user) {
+        // Đăng nhập thành công - redirect based on role
+        if (isAdmin(user)) {
+          router.push('/admin')
+        } else if (isEmployer(user)) {
+          router.push('/employer')
+        } else {
+          router.push('/student')
+        }
+      } else {
+        // Đăng nhập thất bại
+        setErrors({ general: 'Email hoặc mật khẩu không chính xác' })
+      }
     } catch (err) {
       console.error('Login error:', err)
-      setErrors({ general: 'Có lỗi xảy ra. Vui lòng thử lại.' })
+      setErrors({ general: 'Có lỗi xảy ra khi đăng nhập. Vui lòng thử lại.' })
     } finally {
       setIsLoading(false)
     }
@@ -62,6 +85,15 @@ export default function LoginPage() {
         </div>
 
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+          {/* Message từ URL params (admin protection) */}
+          {message && (
+            <div className="bg-yellow-50 border border-yellow-200 text-yellow-700 px-4 py-3 rounded-md flex items-start">
+              <AlertCircle className="h-5 w-5 text-yellow-400 mr-2 mt-0.5 flex-shrink-0" />
+              <span className="text-sm">{message}</span>
+            </div>
+          )}
+
+          {/* General error */}
           {errors.general && (
             <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-md">
               {errors.general}
@@ -167,6 +199,16 @@ export default function LoginPage() {
             </button>
           </div>
 
+          {/* Demo accounts info */}
+          <div className="bg-blue-50 border border-blue-200 rounded-md p-4">
+            <h4 className="text-sm font-medium text-blue-800 mb-2">Tài khoản demo:</h4>
+            <div className="text-xs text-blue-700 space-y-1">
+              <div><strong>Admin:</strong> admin@vjec.edu.vn / admin123</div>
+              <div><strong>Employer:</strong> employer@company.com / employer123</div>
+              <div><strong>Student:</strong> student@student.com / student123</div>
+            </div>
+          </div>
+
           <div className="text-center">
             <p className="text-sm text-gray-600">
               Chưa có tài khoản?{' '}
@@ -178,5 +220,17 @@ export default function LoginPage() {
         </form>
       </div>
     </div>
+  )
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+      </div>
+    }>
+      <LoginForm />
+    </Suspense>
   )
 } 

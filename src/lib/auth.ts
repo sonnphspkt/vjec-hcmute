@@ -1,7 +1,63 @@
 import bcrypt from 'bcryptjs'
 import { prisma } from './prisma'
+import { Role } from '@prisma/client'
 
-type Role = 'STUDENT' | 'EMPLOYER' | 'ADMIN'
+export interface AuthUser {
+  id: string
+  email: string
+  fullName: string
+  role: Role
+}
+
+export function isAdmin(user: AuthUser | null): boolean {
+  return user?.role === 'ADMIN'
+}
+
+export function isEmployer(user: AuthUser | null): boolean {
+  return user?.role === 'EMPLOYER'
+}
+
+export function isStudent(user: AuthUser | null): boolean {
+  return user?.role === 'STUDENT'
+}
+
+// Session management functions (using localStorage for simplicity)
+export function setSession(user: AuthUser): void {
+  if (typeof window !== 'undefined') {
+    localStorage.setItem('user_session', JSON.stringify(user))
+  }
+}
+
+export function getSession(): AuthUser | null {
+  if (typeof window !== 'undefined') {
+    const session = localStorage.getItem('user_session')
+    return session ? JSON.parse(session) : null
+  }
+  return null
+}
+
+export function clearSession(): void {
+  if (typeof window !== 'undefined') {
+    localStorage.removeItem('user_session')
+  }
+}
+
+export async function authenticateAndSetSession(email: string, password: string): Promise<AuthUser | null> {
+  const user = await validateUser(email, password)
+  
+  if (user) {
+    const authUser: AuthUser = {
+      id: user.id,
+      email: user.email,
+      fullName: user.fullName,
+      role: user.role
+    }
+    setSession(authUser)
+    return authUser
+  }
+  
+  return null
+}
 
 export async function hashPassword(password: string): Promise<string> {
   return await bcrypt.hash(password, 10)

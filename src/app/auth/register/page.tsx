@@ -2,7 +2,10 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { Eye, EyeOff, Mail, Lock, User, Building2, GraduationCap } from 'lucide-react'
+import { createUser, setSession, isEmployer } from '@/lib/auth'
+import { Role } from '@prisma/client'
 
 type UserRole = 'STUDENT' | 'EMPLOYER'
 
@@ -18,6 +21,7 @@ export default function RegisterPage() {
   })
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [isLoading, setIsLoading] = useState(false)
+  const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -45,17 +49,36 @@ export default function RegisterPage() {
     }
 
     try {
-      // TODO: Implement actual registration logic
-      console.log('Registration attempt:', formData)
-      
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      
-      alert('Đăng ký thành công! Vui lòng đăng nhập.')
-      // TODO: Redirect to login
-    } catch (err) {
+      // Tạo user mới
+      const newUser = await createUser({
+        email: formData.email,
+        password: formData.password,
+        fullName: formData.fullName,
+        role: formData.role as Role
+      })
+
+      // Set session cho user mới đăng ký
+      const authUser = {
+        id: newUser.id,
+        email: newUser.email,
+        fullName: newUser.fullName,
+        role: newUser.role
+      }
+      setSession(authUser)
+
+      // Redirect based on role
+      if (isEmployer(authUser)) {
+        router.push('/employer')
+      } else {
+        router.push('/student')
+      }
+    } catch (err: any) {
       console.error('Registration error:', err)
-      setErrors({ general: 'Có lỗi xảy ra. Vui lòng thử lại.' })
+      if (err.code === 'P2002') {
+        setErrors({ email: 'Email này đã được sử dụng' })
+      } else {
+        setErrors({ general: 'Có lỗi xảy ra khi tạo tài khoản. Vui lòng thử lại.' })
+      }
     } finally {
       setIsLoading(false)
     }

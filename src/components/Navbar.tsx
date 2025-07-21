@@ -1,7 +1,25 @@
+'use client'
 import Link from 'next/link'
-import { Search, Menu } from 'lucide-react'
+import { Search, Menu, LogOut, User } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { getSession, clearSession, isAdmin, AuthUser } from '@/lib/auth'
+import { useRouter } from 'next/navigation'
 
 export default function Navbar() {
+  const [user, setUser] = useState<AuthUser | null>(null)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const router = useRouter()
+
+  useEffect(() => {
+    setUser(getSession())
+  }, [])
+
+  const handleLogout = () => {
+    clearSession()
+    setUser(null)
+    router.push('/')
+  }
+
   return (
     <nav className="bg-white shadow-md border-b">
       {/* Header với logo */}
@@ -22,12 +40,21 @@ export default function Navbar() {
             <Link href="/jobs" className="text-gray-700 hover:text-blue-600 font-medium">
               Việc làm
             </Link>
-            <Link href="/student" className="text-gray-700 hover:text-blue-600 font-medium">
-              Sinh viên
-            </Link>
-            <Link href="/admin" className="text-gray-700 hover:text-blue-600 font-medium">
-              Admin
-            </Link>
+            
+            {/* Chỉ hiển thị tab Sinh viên khi user đã đăng nhập */}
+            {user && (
+              <Link href="/student" className="text-gray-700 hover:text-blue-600 font-medium">
+                Sinh viên
+              </Link>
+            )}
+            
+            {/* Chỉ hiển thị tab Admin khi user có role ADMIN */}
+            {user && isAdmin(user) && (
+              <Link href="/admin" className="text-gray-700 hover:text-blue-600 font-medium">
+                Admin
+              </Link>
+            )}
+            
             <div className="relative group">
               <button className="text-gray-700 hover:text-blue-600 font-medium flex items-center">
                 Quốc tế
@@ -47,7 +74,7 @@ export default function Navbar() {
                 </Link>
               </div>
             </div>
-            <Link href="/jobs?country=vietnam" className="text-gray-700 hover:text-blue-600 font-medium">
+            <Link href="/domestic" className="text-gray-700 hover:text-blue-600 font-medium">
               Trong nước
             </Link>
           </div>
@@ -64,24 +91,52 @@ export default function Navbar() {
               />
             </div>
 
-            {/* User Menu */}
+            {/* User Authentication Section */}
             <div className="flex items-center space-x-2">
-              <Link 
-                href="/auth/login"
-                className="text-gray-700 hover:text-blue-600 font-medium"
-              >
-                Đăng nhập
-              </Link>
-              <Link 
-                href="/auth/register"
-                className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 font-medium"
-              >
-                Đăng ký
-              </Link>
+              {user ? (
+                /* User logged in */
+                <div className="flex items-center space-x-3">
+                  <div className="flex items-center space-x-2">
+                    <User className="h-4 w-4 text-gray-600" />
+                    <span className="text-sm text-gray-700">
+                      Xin chào, {user.fullName}
+                    </span>
+                    <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">
+                      {user.role}
+                    </span>
+                  </div>
+                  <button 
+                    onClick={handleLogout}
+                    className="flex items-center space-x-1 text-gray-600 hover:text-red-600 font-medium"
+                  >
+                    <LogOut className="h-4 w-4" />
+                    <span>Đăng xuất</span>
+                  </button>
+                </div>
+              ) : (
+                /* User not logged in */
+                <>
+                  <Link 
+                    href="/auth/login"
+                    className="text-gray-700 hover:text-blue-600 font-medium"
+                  >
+                    Đăng nhập
+                  </Link>
+                  <Link 
+                    href="/auth/register"
+                    className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 font-medium"
+                  >
+                    Đăng ký
+                  </Link>
+                </>
+              )}
             </div>
 
             {/* Mobile menu button */}
-            <button className="md:hidden">
+            <button 
+              className="md:hidden"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
               <Menu className="h-6 w-6 text-gray-700" />
             </button>
           </div>
@@ -89,12 +144,23 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Navigation */}
-      <div className="md:hidden border-t bg-gray-50 px-4 py-3">
+      <div className={`md:hidden border-t bg-gray-50 px-4 py-3 ${isMenuOpen ? 'block' : 'hidden'}`}>
         <div className="flex flex-col space-y-3">
           <Link href="/news" className="text-gray-700 font-medium">Tin tức</Link>
           <Link href="/jobs" className="text-gray-700 font-medium">Việc làm</Link>
+          
+          {/* Mobile Sinh viên Link - chỉ hiển thị khi đã đăng nhập */}
+          {user && (
+            <Link href="/student" className="text-gray-700 font-medium">Sinh viên</Link>
+          )}
+          
+          {/* Mobile Admin Link - chỉ hiển thị khi là admin */}
+          {user && isAdmin(user) && (
+            <Link href="/admin" className="text-gray-700 font-medium">Admin</Link>
+          )}
+          
           <Link href="/jobs?country=japan" className="text-gray-700 font-medium">Nhật Bản</Link>
-          <Link href="/jobs?country=vietnam" className="text-gray-700 font-medium">Trong nước</Link>
+          <Link href="/domestic" className="text-gray-700 font-medium">Trong nước</Link>
           
           {/* Mobile Search */}
           <div className="flex items-center bg-white rounded-lg px-3 py-2 border">
@@ -105,6 +171,21 @@ export default function Navbar() {
               className="text-sm focus:outline-none flex-1"
             />
           </div>
+
+          {/* Mobile User Section */}
+          {user && (
+            <div className="border-t pt-3 mt-3">
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-gray-700">{user.fullName} ({user.role})</span>
+                <button 
+                  onClick={handleLogout}
+                  className="text-red-600 hover:text-red-700 text-sm"
+                >
+                  Đăng xuất
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </nav>
