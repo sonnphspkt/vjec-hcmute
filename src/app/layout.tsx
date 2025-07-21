@@ -4,6 +4,7 @@ import Image from "next/image";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import HeaderBanner from "@/components/HeaderBanner";
+import { Providers } from "./providers";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -76,14 +77,16 @@ export default function RootLayout({
   return (
     <html lang="vi">
       <body className={`${inter.variable} font-sans antialiased`}>
-        <div className="min-h-screen flex flex-col">
-          <HeaderBanner />
-          <Navbar />
-          <main className="flex-1">
-            {children}
-          </main>
-          <Footer />
-        </div>
+        <Providers>
+          <div className="min-h-screen flex flex-col">
+            <HeaderBanner />
+            <Navbar />
+            <main className="flex-1">
+              {children}
+            </main>
+            <Footer />
+          </div>
+        </Providers>
       </body>
     </html>
   );
