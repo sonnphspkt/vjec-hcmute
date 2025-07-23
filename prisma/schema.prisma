@@ -115,22 +115,29 @@ model EmployerProfile {
 }
 
 model JobPost {
-  id          String   @id @default(cuid())
-  title       String
-  description String
-  salary      String
-  country     String
-  jobType     JobType
-  category    String
-  skills      String // JSON string array
-  employerId  String
-  approved    Boolean  @default(false)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id             String   @id @default(cuid())
+  title          String
+  description    String
+  salary         String
+  country        String
+  jobType        JobType
+  category       String
+  skills         String // JSON string array
+  employerId     String
+  approved       Boolean  @default(false)
+  
+  // External job source fields
+  externalSource String? // Source: TOPCV, VIETNAMWORKS, etc.
+  externalId     String? // Original job ID from external source
+  externalUrl    String? // Link to original job posting
+  
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 
   employer EmployerProfile @relation(fields: [employerId], references: [id], onDelete: Cascade)
   payments Payment[]
 
+  @@unique([externalSource, externalId]) // Prevent duplicate imports
   @@map("job_posts")
 }
 
