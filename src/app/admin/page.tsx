@@ -305,6 +305,26 @@ export default function AdminPage() {
                 <Plus className="h-5 w-5" />
               </div>
             </Link>
+
+            <Link 
+              href="/admin/external-jobs"
+              className="flex items-center justify-between p-4 bg-gradient-to-r from-purple-50 to-violet-50 border border-purple-200 rounded-lg hover:shadow-md transition-all group"
+            >
+              <div className="flex items-center">
+                <div className="flex items-center justify-center w-12 h-12 bg-purple-500 rounded-lg mr-4">
+                  <Briefcase className="h-6 w-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-900 group-hover:text-purple-600">
+                    External Jobs
+                  </h3>
+                  <p className="text-sm text-gray-600">Quản lý jobs từ nguồn bên ngoài</p>
+                </div>
+              </div>
+              <div className="text-purple-500 group-hover:text-purple-600">
+                <Plus className="h-5 w-5" />
+              </div>
+            </Link>
             
             <div className="flex items-center justify-between p-4 bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-lg opacity-50">
               <div className="flex items-center">
