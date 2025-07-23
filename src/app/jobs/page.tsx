@@ -381,15 +381,7 @@ function JobsList({
   const startIndex = (currentPage - 1) * jobsPerPage
   const currentJobs = filteredJobs.slice(startIndex, startIndex + jobsPerPage)
 
-  // Debug logging
-  console.log('Pagination Debug:', {
-    filteredJobsLength: filteredJobs.length,
-    jobsPerPage: jobsPerPage,
-    totalPages: totalPages,
-    currentPage: currentPage,
-    startIndex: startIndex,
-    currentJobsLength: currentJobs.length
-  })
+
 
   return (
     <div className="space-y-6">
@@ -399,17 +391,7 @@ function JobsList({
         </h2>
       </div>
 
-      {/* Debug Info - Remove this after testing */}
-      <div className="bg-yellow-100 p-4 rounded border border-yellow-400">
-        <p><strong>Debug Info:</strong></p>
-        <p>Total Jobs: {filteredJobs.length}</p>
-        <p>Jobs Per Page: {jobsPerPage}</p>
-        <p>Total Pages: {totalPages}</p>
-        <p>Current Page: {currentPage}</p>
-        <p>Start Index: {startIndex}</p>
-        <p>Current Jobs: {currentJobs.length}</p>
-        <p>Should Show Pagination: {totalPages > 1 ? 'YES' : 'NO'}</p>
-      </div>
+
 
       {filteredJobs.length === 0 ? (
         <div className="text-center py-12">
@@ -429,7 +411,6 @@ function JobsList({
             <div className="flex justify-center items-center space-x-2 pt-8">
               <button 
                 onClick={() => {
-                  console.log('Trước button clicked')
                   onPageChange(Math.max(1, currentPage - 1))
                 }}
                 disabled={currentPage === 1}
@@ -457,7 +438,6 @@ function JobsList({
                     <button
                       key={1}
                       onClick={() => {
-                        console.log('First page (1) button clicked')
                         onPageChange(1)
                       }}
                       className="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50"
@@ -479,7 +459,6 @@ function JobsList({
                     <button
                       key={i}
                       onClick={() => {
-                        console.log(`Page ${i} button clicked`)
                         onPageChange(i)
                       }}
                       className={`px-3 py-2 text-sm font-medium rounded-lg ${
@@ -505,7 +484,6 @@ function JobsList({
                     <button
                       key={totalPages}
                       onClick={() => {
-                        console.log(`Last page (${totalPages}) button clicked`)
                         onPageChange(totalPages)
                       }}
                       className="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50"
@@ -520,7 +498,6 @@ function JobsList({
               
               <button 
                 onClick={() => {
-                  console.log('Sau button clicked')
                   onPageChange(Math.min(totalPages, currentPage + 1))
                 }}
                 disabled={currentPage === totalPages}
@@ -567,12 +544,8 @@ function JobsContent() {
   }
 
   const handlePageChange = (page: number) => {
-    console.log('handlePageChange called with page:', page)
-    console.log('Current page before change:', currentPage)
     setCurrentPage(page)
     window.scrollTo({ top: 0, behavior: 'smooth' })
-    // Add alert for testing
-    alert(`Changing to page ${page}`)
   }
 
   return (

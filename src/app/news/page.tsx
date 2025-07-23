@@ -2,6 +2,7 @@
 import { Calendar, User, Eye, Tag, TrendingUp } from 'lucide-react'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 
 // Interface for Article
 interface Article {
@@ -111,9 +112,11 @@ const categories = [
 ]
 
 function NewsCard({ article, featured = false }: {
-  article: typeof mockNews[0]
+  article: Article
   featured?: boolean
 }) {
+  const router = useRouter()
+
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('vi-VN', {
       year: 'numeric',
@@ -122,12 +125,18 @@ function NewsCard({ article, featured = false }: {
     })
   }
 
+  const handleArticleClick = () => {
+    // For now, show an alert. Later this would navigate to article detail page
+    alert(`Đang chuyển đến bài viết: ${article.title}`)
+    // router.push(`/news/${article.id}`)
+  }
+
   return (
     <article className={`bg-white rounded-lg shadow-sm border hover:shadow-md transition-shadow ${
       featured ? 'lg:flex lg:space-x-6' : ''
     }`}>
-      <div className={featured ? 'lg:w-1/2' : ''}>
-        <div className="aspect-video bg-gray-200 rounded-t-lg lg:rounded-l-lg lg:rounded-tr-none overflow-hidden relative">
+      <div className={featured ? 'lg:w-1/2' : ''} onClick={handleArticleClick}>
+        <div className="aspect-video bg-gray-200 rounded-t-lg lg:rounded-l-lg lg:rounded-tr-none overflow-hidden relative cursor-pointer">
           <Image 
             src={article.image || 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=600&h=300&fit=crop&crop=center'} 
             alt={article.title}
@@ -160,9 +169,12 @@ function NewsCard({ article, featured = false }: {
           </span>
         </div>
         
-        <h2 className={`font-bold text-gray-900 mb-3 hover:text-blue-600 cursor-pointer ${
-          featured ? 'text-2xl' : 'text-xl'
-        }`}>
+        <h2 
+          className={`font-bold text-gray-900 mb-3 hover:text-blue-600 cursor-pointer ${
+            featured ? 'text-2xl' : 'text-xl'
+          }`}
+          onClick={handleArticleClick}
+        >
           {article.title}
         </h2>
         
@@ -175,7 +187,10 @@ function NewsCard({ article, featured = false }: {
             <User className="h-4 w-4 text-gray-400" />
             <span className="text-sm text-gray-600">{article.author}</span>
           </div>
-          <button className="text-blue-600 hover:text-blue-700 font-medium text-sm">
+          <button 
+            onClick={handleArticleClick}
+            className="text-blue-600 hover:text-blue-700 font-medium text-sm"
+          >
             Đọc thêm →
           </button>
         </div>
@@ -185,9 +200,12 @@ function NewsCard({ article, featured = false }: {
 }
 
 export default function NewsPage() {
+  const router = useRouter()
   const [articles, setArticles] = useState<Article[]>(mockNews)
   const [loading, setLoading] = useState(true)
   const [selectedCategory, setSelectedCategory] = useState('Tất cả')
+  const [sortBy, setSortBy] = useState('newest')
+  const [currentPage, setCurrentPage] = useState(1)
 
   useEffect(() => {
     fetchArticles()
@@ -213,6 +231,21 @@ export default function NewsPage() {
     } finally {
       setLoading(false)
     }
+  }
+
+  const handlePopularArticleClick = (article: Article) => {
+    alert(`Đang chuyển đến bài viết phổ biến: ${article.title}`)
+    // router.push(`/news/${article.id}`)
+  }
+
+  const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSortBy(e.target.value)
+    // Apply sorting logic here
+  }
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   const featuredArticles = articles.filter(article => article.featured)
@@ -278,12 +311,16 @@ export default function NewsPage() {
               <h3 className="text-lg font-semibold mb-4">Tin đọc nhiều</h3>
               <div className="space-y-4">
                 {mockNews.slice(0, 3).map((article, index) => (
-                  <div key={article.id} className="flex space-x-3">
+                  <div 
+                    key={article.id} 
+                    className="flex space-x-3 cursor-pointer hover:bg-gray-50 p-2 rounded transition-colors"
+                    onClick={() => handlePopularArticleClick(article)}
+                  >
                     <span className="flex-shrink-0 w-6 h-6 bg-blue-600 text-white text-xs font-bold rounded-full flex items-center justify-center">
                       {index + 1}
                     </span>
                     <div>
-                      <h4 className="text-sm font-medium text-gray-900 line-clamp-2 hover:text-blue-600 cursor-pointer">
+                      <h4 className="text-sm font-medium text-gray-900 line-clamp-2 hover:text-blue-600">
                         {article.title}
                       </h4>
                       <p className="text-xs text-gray-500 mt-1 flex items-center">
@@ -303,10 +340,14 @@ export default function NewsPage() {
               <h2 className="text-2xl font-bold text-gray-900">
                 Tất cả tin tức ({mockNews.length} bài viết)
               </h2>
-              <select className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
-                <option>Mới nhất</option>
-                <option>Phổ biến nhất</option>
-                <option>Đọc nhiều nhất</option>
+              <select 
+                value={sortBy}
+                onChange={handleSortChange}
+                className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+              >
+                <option value="newest">Mới nhất</option>
+                <option value="popular">Phổ biến nhất</option>
+                <option value="mostViewed">Đọc nhiều nhất</option>
               </select>
             </div>
 
@@ -318,22 +359,34 @@ export default function NewsPage() {
 
             {/* Pagination */}
             <div className="flex justify-center items-center space-x-2 pt-8">
-              <button className="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">
+              <button 
+                onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
+                disabled={currentPage === 1}
+                className="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
                 Trước
               </button>
               {[1, 2, 3, '...', 10].map((page, index) => (
                 <button
                   key={index}
+                  onClick={() => typeof page === 'number' && handlePageChange(page)}
+                  disabled={typeof page !== 'number'}
                   className={`px-3 py-2 text-sm font-medium rounded-lg ${
-                    page === 1
+                    page === currentPage
                       ? 'text-white bg-blue-600 border border-blue-600'
-                      : 'text-gray-500 bg-white border border-gray-300 hover:bg-gray-50'
+                      : typeof page === 'number'
+                      ? 'text-gray-500 bg-white border border-gray-300 hover:bg-gray-50'
+                      : 'text-gray-400 bg-white border border-gray-300 cursor-default'
                   }`}
                 >
                   {page}
                 </button>
               ))}
-              <button className="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">
+              <button 
+                onClick={() => handlePageChange(Math.min(10, currentPage + 1))}
+                disabled={currentPage === 10}
+                className="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
                 Sau
               </button>
             </div>
