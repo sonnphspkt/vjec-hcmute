@@ -5,8 +5,9 @@ import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import { prisma } from '@/lib/prisma'
 import { validateUser } from '@/lib/auth'
 import { Role } from '@prisma/client'
+import { NextAuthOptions } from 'next-auth'
 
-const handler = NextAuth({
+export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     GoogleProvider({
@@ -98,13 +99,13 @@ const handler = NextAuth({
         if (dbUser) {
           token.role = dbUser.role
           token.id = dbUser.id
-          token.fullName = dbUser.fullName
+          token.fullName = dbUser.fullName || dbUser.email.split('@')[0]
         }
       }
       return token
     },
     async session({ session, token }) {
-      if (token) {
+      if (token && token.id && token.role && token.fullName) {
         session.user.id = token.id as string
         session.user.role = token.role as Role
         session.user.fullName = token.fullName as string
@@ -116,6 +117,8 @@ const handler = NextAuth({
     signIn: '/auth/login',
     error: '/auth/error'
   }
-})
+}
+
+const handler = NextAuth(authOptions)
 
 export { handler as GET, handler as POST } 
