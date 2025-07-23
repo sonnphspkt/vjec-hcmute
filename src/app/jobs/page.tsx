@@ -381,12 +381,34 @@ function JobsList({
   const startIndex = (currentPage - 1) * jobsPerPage
   const currentJobs = filteredJobs.slice(startIndex, startIndex + jobsPerPage)
 
+  // Debug logging
+  console.log('Pagination Debug:', {
+    filteredJobsLength: filteredJobs.length,
+    jobsPerPage: jobsPerPage,
+    totalPages: totalPages,
+    currentPage: currentPage,
+    startIndex: startIndex,
+    currentJobsLength: currentJobs.length
+  })
+
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h2 className="text-2xl font-bold text-gray-900">
           Danh sách việc làm ({filteredJobs.length} kết quả)
         </h2>
+      </div>
+
+      {/* Debug Info - Remove this after testing */}
+      <div className="bg-yellow-100 p-4 rounded border border-yellow-400">
+        <p><strong>Debug Info:</strong></p>
+        <p>Total Jobs: {filteredJobs.length}</p>
+        <p>Jobs Per Page: {jobsPerPage}</p>
+        <p>Total Pages: {totalPages}</p>
+        <p>Current Page: {currentPage}</p>
+        <p>Start Index: {startIndex}</p>
+        <p>Current Jobs: {currentJobs.length}</p>
+        <p>Should Show Pagination: {totalPages > 1 ? 'YES' : 'NO'}</p>
       </div>
 
       {filteredJobs.length === 0 ? (
