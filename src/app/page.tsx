@@ -1,7 +1,20 @@
+'use client'
 import Link from 'next/link'
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { Search, Briefcase, GraduationCap, TrendingUp } from 'lucide-react'
 
 export default function Home() {
+  const [searchQuery, setSearchQuery] = useState('')
+  const router = useRouter()
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (searchQuery.trim()) {
+      router.push(`/jobs?search=${encodeURIComponent(searchQuery.trim())}`)
+    }
+  }
+
   return (
     <div className="min-h-screen">
       {/* Hero Banner */}
@@ -18,19 +31,24 @@ export default function Home() {
             </p>
             
             {/* Search Bar */}
-            <div className="max-w-2xl mx-auto mb-8">
+            <form onSubmit={handleSearch} className="max-w-2xl mx-auto mb-8">
               <div className="bg-white rounded-lg p-2 flex items-center shadow-lg">
                 <Search className="h-5 w-5 text-gray-400 ml-3" />
                 <input 
                   type="text" 
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Tìm kiếm việc làm theo vị trí, công ty..."
                   className="flex-1 px-4 py-3 text-gray-900 focus:outline-none"
                 />
-                <button className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 font-medium">
+                <button 
+                  type="submit"
+                  className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 font-medium"
+                >
                   Tìm kiếm
                 </button>
               </div>
-            </div>
+            </form>
 
             {/* Quick Actions */}
             <div className="flex flex-wrap justify-center gap-4">
@@ -40,7 +58,7 @@ export default function Home() {
               <Link href="/jobs?type=internship" className="bg-white/10 backdrop-blur-sm border border-white/20 text-white px-6 py-3 rounded-lg hover:bg-white/20 transition-colors">
                 🎓 Chương trình thực tập
               </Link>
-              <Link href="/jobs?country=vietnam" className="bg-white/10 backdrop-blur-sm border border-white/20 text-white px-6 py-3 rounded-lg hover:bg-white/20 transition-colors">
+              <Link href="/domestic" className="bg-white/10 backdrop-blur-sm border border-white/20 text-white px-6 py-3 rounded-lg hover:bg-white/20 transition-colors">
                 🇻🇳 Việc làm trong nước
               </Link>
             </div>
@@ -105,7 +123,7 @@ export default function Home() {
                 Thông tin về các chương trình học bổng, trao đổi sinh viên và 
                 cơ hội học tập quốc tế.
               </p>
-              <Link href="/scholarships" className="text-green-600 font-semibold hover:text-green-700">
+              <Link href="/news?category=Học bổng" className="text-green-600 font-semibold hover:text-green-700">
                 Tìm hiểu thêm →
               </Link>
             </div>
@@ -120,7 +138,7 @@ export default function Home() {
                 Tư vấn định hướng nghiệp, xây dựng CV và chuẩn bị phỏng vấn 
                 từ các chuyên gia.
               </p>
-              <Link href="/career-guidance" className="text-purple-600 font-semibold hover:text-purple-700">
+              <Link href="/news?category=Kỹ năng nghề nghiệp" className="text-purple-600 font-semibold hover:text-purple-700">
                 Đặt lịch tư vấn →
               </Link>
             </div>

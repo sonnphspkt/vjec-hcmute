@@ -1,4 +1,6 @@
-import { Suspense } from 'react'
+'use client'
+import { useState, useEffect, Suspense } from 'react'
+import { useSearchParams } from 'next/navigation'
 import JobCard from '@/components/JobCard'
 import { Search, Filter } from 'lucide-react'
 
@@ -48,94 +50,96 @@ const mockJobs = [
   },
   {
     id: '4',
-    title: 'Remote UI/UX Designer',
-    description: 'Thiết kế giao diện người dùng cho các ứng dụng mobile và web. Làm việc remote 100% với team quốc tế.',
-    salary: '$1,200 - $2,000 USD',
+    title: 'UX/UI Designer - Remote',
+    description: 'Thiết kế giao diện người dùng cho các ứng dụng di động và web. Làm việc từ xa, flexible working hours.',
+    salary: '12,000,000 - 20,000,000 VND',
     country: 'Remote',
-    jobType: 'REMOTE',
+    jobType: 'FULLTIME',
     category: 'Thiết kế',
-    skills: ['Figma', 'Adobe XD', 'Sketch', 'Prototyping'],
+    skills: ['Figma', 'Adobe XD', 'Sketch', 'User Research'],
     createdAt: new Date('2024-01-08'),
     employer: {
-      company: 'Global Design Studio'
+      company: 'Creative Studio'
     }
   },
   {
     id: '5',
-    title: 'Marketing Assistant - Part-time',
-    description: 'Hỗ trợ team marketing trong các hoạt động quảng bá sản phẩm và quản lý social media. Thời gian linh hoạt, phù hợp cho sinh viên.',
-    salary: '100,000 - 150,000 VND/giờ',
-    country: 'Việt Nam',
-    jobType: 'PARTTIME',
+    title: 'Marketing Executive - Singapore',
+    description: 'Marketing position tại Singapore với cơ hội phát triển career quốc tế. Company sẽ sponsor work permit.',
+    salary: 'S$3,500 - S$5,000',
+    country: 'Singapore',
+    jobType: 'FULLTIME',
     category: 'Marketing',
-    skills: ['Social Media', 'Content Writing', 'Canva', 'Facebook Ads'],
+    skills: ['Digital Marketing', 'Social Media', 'Analytics', 'English'],
     createdAt: new Date('2024-01-05'),
     employer: {
-      company: 'Creative Marketing Agency'
+      company: 'Global Marketing Solutions'
     }
   }
 ]
 
-function JobFilters() {
+function JobFilters({ 
+  filters, 
+  onFiltersChange 
+}: { 
+  filters: any, 
+  onFiltersChange: (filters: any) => void 
+}) {
+  const handleFilterChange = (key: string, value: string) => {
+    onFiltersChange({
+      ...filters,
+      [key]: value
+    })
+  }
+
+  const applyFilters = () => {
+    // Trigger re-filter (this is handled by parent component)
+    console.log('Applying filters:', filters)
+  }
+
   return (
-    <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-      <h3 className="text-lg font-semibold mb-4 flex items-center">
+    <div className="bg-white p-6 rounded-lg shadow-sm border">
+      <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
         <Filter className="h-5 w-5 mr-2" />
-        Bộ lọc tìm kiếm
+        Bộ lọc
       </h3>
       
       <div className="space-y-4">
-        {/* Search */}
+        {/* Country */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Từ khóa
+            Quốc gia
           </label>
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-            <input
-              type="text"
-              placeholder="Tìm theo vị trí, công ty..."
-              className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
-            />
-          </div>
-        </div>
-
-        {/* Location */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Địa điểm
-          </label>
-          <select className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
-            <option value="">Tất cả địa điểm</option>
-            <option value="vietnam">Việt Nam</option>
-            <option value="japan">Nhật Bản</option>
-            <option value="singapore">Singapore</option>
-            <option value="korea">Hàn Quốc</option>
-            <option value="remote">Remote</option>
+          <select 
+            value={filters.country}
+            onChange={(e) => handleFilterChange('country', e.target.value)}
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+          >
+            <option value="">Tất cả</option>
+            <option value="Việt Nam">Việt Nam</option>
+            <option value="Nhật Bản">Nhật Bản</option>
+            <option value="Singapore">Singapore</option>
+            <option value="Hàn Quốc">Hàn Quốc</option>
+            <option value="Remote">Remote</option>
           </select>
         </div>
 
         {/* Job Type */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Loại hình công việc
+            Loại công việc
           </label>
-          <div className="space-y-2">
-            {[
-              { value: 'FULLTIME', label: 'Toàn thời gian' },
-              { value: 'PARTTIME', label: 'Bán thời gian' },
-              { value: 'INTERNSHIP', label: 'Thực tập' },
-              { value: 'REMOTE', label: 'Remote' }
-            ].map((type) => (
-              <label key={type.value} className="flex items-center">
-                <input
-                  type="checkbox"
-                  className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                />
-                <span className="ml-2 text-sm text-gray-700">{type.label}</span>
-              </label>
-            ))}
-          </div>
+          <select 
+            value={filters.jobType}
+            onChange={(e) => handleFilterChange('jobType', e.target.value)}
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+          >
+            <option value="">Tất cả</option>
+            <option value="FULLTIME">Toàn thời gian</option>
+            <option value="PARTTIME">Bán thời gian</option>
+            <option value="INTERNSHIP">Thực tập</option>
+            <option value="CONTRACT">Hợp đồng</option>
+          </select>
         </div>
 
         {/* Category */}
@@ -143,17 +147,26 @@ function JobFilters() {
           <label className="block text-sm font-medium text-gray-700 mb-2">
             Lĩnh vực
           </label>
-          <select className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
-            <option value="">Tất cả lĩnh vực</option>
-            <option value="it">Công nghệ thông tin</option>
-            <option value="marketing">Marketing</option>
-            <option value="design">Thiết kế</option>
-            <option value="finance">Tài chính</option>
-            <option value="hr">Nhân sự</option>
+          <select 
+            value={filters.category}
+            onChange={(e) => handleFilterChange('category', e.target.value)}
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+          >
+            <option value="">Tất cả</option>
+            <option value="Công nghệ thông tin">Công nghệ thông tin</option>
+            <option value="Phần mềm">Phần mềm</option>
+            <option value="Dữ liệu">Dữ liệu</option>
+            <option value="Thiết kế">Thiết kế</option>
+            <option value="Marketing">Marketing</option>
+            <option value="Tài chính">Tài chính</option>
+            <option value="Nhân sự">Nhân sự</option>
           </select>
         </div>
 
-        <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
+        <button 
+          onClick={applyFilters}
+          className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors"
+        >
           Áp dụng bộ lọc
         </button>
       </div>
@@ -161,46 +174,192 @@ function JobFilters() {
   )
 }
 
-function JobsList() {
+function JobsList({ 
+  searchQuery, 
+  filters, 
+  sortBy, 
+  currentPage, 
+  onPageChange 
+}: { 
+  searchQuery: string,
+  filters: any,
+  sortBy: string,
+  currentPage: number,
+  onPageChange: (page: number) => void
+}) {
+  // Filter and sort jobs
+  let filteredJobs = mockJobs.filter(job => {
+    // Search filter
+    if (searchQuery && !job.title.toLowerCase().includes(searchQuery.toLowerCase()) && 
+        !job.description.toLowerCase().includes(searchQuery.toLowerCase()) &&
+        !job.employer.company.toLowerCase().includes(searchQuery.toLowerCase())) {
+      return false
+    }
+    
+    // Country filter
+    if (filters.country && job.country !== filters.country) {
+      return false
+    }
+    
+    // Job type filter
+    if (filters.jobType && job.jobType !== filters.jobType) {
+      return false
+    }
+    
+    // Category filter
+    if (filters.category && job.category !== filters.category) {
+      return false
+    }
+    
+    return true
+  })
+
+  // Sort jobs
+  if (sortBy === 'newest') {
+    filteredJobs.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
+  } else if (sortBy === 'oldest') {
+    filteredJobs.sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime())
+  }
+
+  // Pagination
+  const jobsPerPage = 5
+  const totalPages = Math.ceil(filteredJobs.length / jobsPerPage)
+  const startIndex = (currentPage - 1) * jobsPerPage
+  const currentJobs = filteredJobs.slice(startIndex, startIndex + jobsPerPage)
+
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h2 className="text-2xl font-bold text-gray-900">
-          Danh sách việc làm ({mockJobs.length} kết quả)
+          Danh sách việc làm ({filteredJobs.length} kết quả)
         </h2>
-        <select className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
-          <option>Mới nhất</option>
-          <option>Lương cao nhất</option>
-          <option>Phù hợp nhất</option>
-        </select>
       </div>
 
-      <div className="grid gap-6">
-        {mockJobs.map((job) => (
-          <JobCard key={job.id} job={job} />
-        ))}
+      {filteredJobs.length === 0 ? (
+        <div className="text-center py-12">
+          <p className="text-gray-500 text-lg">Không tìm thấy việc làm phù hợp</p>
+          <p className="text-gray-400 text-sm mt-2">Thử thay đổi bộ lọc hoặc từ khóa tìm kiếm</p>
+        </div>
+      ) : (
+        <>
+          <div className="grid gap-6">
+            {currentJobs.map((job) => (
+              <JobCard key={job.id} job={job} />
+            ))}
+          </div>
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="flex justify-center items-center space-x-2 pt-8">
+              <button 
+                onClick={() => onPageChange(Math.max(1, currentPage - 1))}
+                disabled={currentPage === 1}
+                className="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Trước
+              </button>
+              
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                <button
+                  key={page}
+                  onClick={() => onPageChange(page)}
+                  className={`px-3 py-2 text-sm font-medium rounded-lg ${
+                    page === currentPage
+                      ? 'text-white bg-blue-600 border border-blue-600'
+                      : 'text-gray-500 bg-white border border-gray-300 hover:bg-gray-50'
+                  }`}
+                >
+                  {page}
+                </button>
+              ))}
+              
+              <button 
+                onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
+                disabled={currentPage === totalPages}
+                className="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Sau
+              </button>
+            </div>
+          )}
+        </>
+      )}
+    </div>
+  )
+}
+
+function JobsContent() {
+  const searchParams = useSearchParams()
+  const [filters, setFilters] = useState({
+    country: '',
+    jobType: '',
+    category: ''
+  })
+  const [sortBy, setSortBy] = useState('newest')
+  const [currentPage, setCurrentPage] = useState(1)
+  const [searchQuery, setSearchQuery] = useState('')
+
+  useEffect(() => {
+    // Get initial search query from URL
+    const query = searchParams.get('search') || ''
+    const country = searchParams.get('country') || ''
+    const type = searchParams.get('type') || ''
+    
+    setSearchQuery(query)
+    setFilters(prev => ({
+      ...prev,
+      country: country,
+      jobType: type
+    }))
+  }, [searchParams])
+
+  const handleFiltersChange = (newFilters: any) => {
+    setFilters(newFilters)
+    setCurrentPage(1) // Reset to first page when filters change
+  }
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  return (
+    <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+      {/* Sidebar Filters */}
+      <div className="lg:col-span-1">
+        <JobFilters 
+          filters={filters}
+          onFiltersChange={handleFiltersChange}
+        />
       </div>
 
-      {/* Pagination */}
-      <div className="flex justify-center items-center space-x-2 pt-8">
-        <button className="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">
-          Trước
-        </button>
-        {[1, 2, 3, '...', 10].map((page, index) => (
-          <button
-            key={index}
-            className={`px-3 py-2 text-sm font-medium rounded-lg ${
-              page === 1
-                ? 'text-white bg-blue-600 border border-blue-600'
-                : 'text-gray-500 bg-white border border-gray-300 hover:bg-gray-50'
-            }`}
+      {/* Jobs List */}
+      <div className="lg:col-span-3">
+        <div className="mb-4 flex justify-between items-center">
+          <div>
+            {searchQuery && (
+              <p className="text-gray-600">
+                Kết quả tìm kiếm cho: "<span className="font-medium">{searchQuery}</span>"
+              </p>
+            )}
+          </div>
+          <select 
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+            className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
           >
-            {page}
-          </button>
-        ))}
-        <button className="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">
-          Sau
-        </button>
+            <option value="newest">Mới nhất</option>
+            <option value="oldest">Cũ nhất</option>
+          </select>
+        </div>
+        
+        <JobsList 
+          searchQuery={searchQuery}
+          filters={filters}
+          sortBy={sortBy}
+          currentPage={currentPage}
+          onPageChange={handlePageChange}
+        />
       </div>
     </div>
   )
@@ -225,19 +384,9 @@ export default function JobsPage() {
 
       {/* Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Sidebar Filters */}
-          <div className="lg:col-span-1">
-            <JobFilters />
-          </div>
-
-          {/* Jobs List */}
-          <div className="lg:col-span-3">
-            <Suspense fallback={<div>Đang tải...</div>}>
-              <JobsList />
-            </Suspense>
-          </div>
-        </div>
+        <Suspense fallback={<div>Đang tải...</div>}>
+          <JobsContent />
+        </Suspense>
       </div>
     </div>
   )
