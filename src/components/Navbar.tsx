@@ -1,24 +1,21 @@
 'use client'
 import Link from 'next/link'
 import { Search, Menu, LogOut, User } from 'lucide-react'
-import { useEffect, useState } from 'react'
-import { getSession, clearSession, isAdmin, AuthUser } from '@/lib/auth'
+import { useState } from 'react'
+import { useSession, signOut } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 
 export default function Navbar() {
-  const [user, setUser] = useState<AuthUser | null>(null)
+  const { data: session, status } = useSession()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const router = useRouter()
 
-  useEffect(() => {
-    setUser(getSession())
-  }, [])
-
-  const handleLogout = () => {
-    clearSession()
-    setUser(null)
-    router.push('/')
+  const handleLogout = async () => {
+    await signOut({ callbackUrl: '/' })
   }
+
+  const user = session?.user
+  const isAdmin = user?.role === 'ADMIN'
 
   return (
     <nav className="bg-white shadow-md border-b">
@@ -49,7 +46,7 @@ export default function Navbar() {
             )}
             
             {/* Chỉ hiển thị tab Admin khi user có role ADMIN */}
-            {user && isAdmin(user) && (
+            {user && isAdmin && (
               <Link href="/admin" className="text-gray-700 hover:text-blue-600 font-medium">
                 Admin
               </Link>
@@ -93,13 +90,16 @@ export default function Navbar() {
 
             {/* User Authentication Section */}
             <div className="flex items-center space-x-2">
-              {user ? (
+              {status === 'loading' ? (
+                /* Loading state */
+                <div className="text-sm text-gray-600">Đang tải...</div>
+              ) : user ? (
                 /* User logged in */
                 <div className="flex items-center space-x-3">
                   <div className="flex items-center space-x-2">
                     <User className="h-4 w-4 text-gray-600" />
                     <span className="text-sm text-gray-700">
-                      Xin chào, {user.fullName}
+                      Xin chào, {user.fullName || user.email}
                     </span>
                     <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">
                       {user.role}
@@ -155,7 +155,7 @@ export default function Navbar() {
           )}
           
           {/* Mobile Admin Link - chỉ hiển thị khi là admin */}
-          {user && isAdmin(user) && (
+          {user && isAdmin && (
             <Link href="/admin" className="text-gray-700 font-medium">Admin</Link>
           )}
           
@@ -173,10 +173,12 @@ export default function Navbar() {
           </div>
 
           {/* Mobile User Section */}
-          {user && (
+          {user ? (
             <div className="border-t pt-3 mt-3">
               <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-700">{user.fullName} ({user.role})</span>
+                <span className="text-sm text-gray-700">
+                  {user.fullName || user.email} ({user.role})
+                </span>
                 <button 
                   onClick={handleLogout}
                   className="text-red-600 hover:text-red-700 text-sm"
@@ -184,6 +186,21 @@ export default function Navbar() {
                   Đăng xuất
                 </button>
               </div>
+            </div>
+          ) : (
+            <div className="border-t pt-3 mt-3 flex space-x-3">
+              <Link 
+                href="/auth/login"
+                className="text-gray-700 hover:text-blue-600 text-sm font-medium"
+              >
+                Đăng nhập
+              </Link>
+              <Link 
+                href="/auth/register"
+                className="bg-blue-600 text-white px-3 py-1 rounded text-sm font-medium"
+              >
+                Đăng ký
+              </Link>
             </div>
           )}
         </div>
