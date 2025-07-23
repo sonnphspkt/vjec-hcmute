@@ -290,7 +290,178 @@ const mockNews = [
     id: '4',
     title: 'Hướng dẫn viết CV ấn tượng để chinh phục nhà tuyển dụng IT',
     excerpt: 'Những bí quyết để tạo ra một bản CV chuyên nghiệp, ấn tượng và hiệu quả trong việc chinh phục các nhà tuyển dụng trong lĩnh vực công nghệ thông tin.',
-    content: 'Một bản CV chất lượng là chìa khóa mở cửa đến với cơ hội việc làm mơ ước...',
+    content: `
+      <h2>Tạo CV IT ấn tượng - Chìa khóa mở cửa sự nghiệp</h2>
+      
+      <p>Trong thị trường việc làm IT cạnh tranh khốc liệt hiện nay, một bản CV chuyên nghiệp không chỉ là giấy thông hành mà còn là yếu tố quyết định đến 80% khả năng được gọi phỏng vấn. Sau đây là hướng dẫn chi tiết để tạo ra một bản CV IT ấn tượng.</p>
+      
+      <h3>🎯 Cấu trúc CV IT hiệu quả</h3>
+      
+      <h4>1. Thông tin cá nhân</h4>
+      <ul>
+        <li><strong>Họ tên:</strong> Font chữ lớn, rõ ràng</li>
+        <li><strong>Liên hệ:</strong> Email chuyên nghiệp, số điện thoại, LinkedIn</li>
+        <li><strong>GitHub/Portfolio:</strong> Link đến các dự án thực tế</li>
+        <li><strong>Địa chỉ:</strong> Chỉ cần thành phố, không cần địa chỉ chi tiết</li>
+      </ul>
+      
+      <h4>2. Professional Summary (50-70 từ)</h4>
+      <p>Ví dụ: "Fullstack Developer với 3+ năm kinh nghiệm phát triển web applications sử dụng React, Node.js và MongoDB. Có kinh nghiệm làm việc với Agile/Scrum, đã deploy 15+ projects thành công. Đam mê học hỏi công nghệ mới và giải quyết vấn đề phức tạp."</p>
+      
+      <h4>3. Technical Skills</h4>
+      <ul>
+        <li><strong>Programming Languages:</strong> JavaScript, Python, Java, TypeScript</li>
+        <li><strong>Frontend:</strong> React, Vue.js, Angular, HTML5, CSS3, Bootstrap</li>
+        <li><strong>Backend:</strong> Node.js, Express, Django, Spring Boot</li>
+        <li><strong>Database:</strong> MySQL, PostgreSQL, MongoDB, Redis</li>
+        <li><strong>DevOps:</strong> Docker, AWS, Git, Jenkins, Linux</li>
+        <li><strong>Tools:</strong> VS Code, Postman, Jira, Figma</li>
+      </ul>
+      
+      <h3>💼 Phần Work Experience</h3>
+      
+      <h4>Format chuẩn cho mỗi position:</h4>
+      <ul>
+        <li><strong>Job Title</strong> - Company Name (MM/YYYY - MM/YYYY)</li>
+        <li>Mô tả ngắn gọn về công ty và team</li>
+        <li>3-5 bullet points về achievements với số liệu cụ thể</li>
+        <li>Technologies sử dụng</li>
+      </ul>
+      
+      <h4>Ví dụ:</h4>
+      <p><strong>Frontend Developer - TechViet Solutions (01/2022 - Present)</strong></p>
+      <ul>
+        <li>Developed 5+ responsive web applications serving 10,000+ daily users</li>
+        <li>Improved page load speed by 40% through code optimization and lazy loading</li>
+        <li>Collaborated with 8-member cross-functional team using Agile methodology</li>
+        <li>Mentored 2 junior developers in React best practices</li>
+        <li><em>Tech stack: React, TypeScript, Redux, Material-UI, Jest</em></li>
+      </ul>
+      
+      <h3>🚀 Phần Projects</h3>
+      
+      <p>Highlight 3-4 projects quan trọng nhất:</p>
+      
+      <h4>E-commerce Platform (Team Project)</h4>
+      <ul>
+        <li><strong>Description:</strong> Full-stack e-commerce platform with admin dashboard</li>
+        <li><strong>Role:</strong> Frontend Lead, implemented checkout flow and user authentication</li>
+        <li><strong>Technologies:</strong> React, Node.js, Express, MongoDB, Stripe API</li>
+        <li><strong>Achievement:</strong> Processed 500+ transactions during demo phase</li>
+        <li><strong>Demo:</strong> https://ecommerce-demo.com | <strong>GitHub:</strong> github.com/user/project</li>
+      </ul>
+      
+      <h3>🎓 Education & Certifications</h3>
+      
+      <ul>
+        <li><strong>Bachelor of Computer Science</strong> - HCMUTE (2020-2024) - GPA: 3.5/4.0</li>
+        <li><strong>AWS Certified Developer - Associate (2023)</strong></li>
+        <li><strong>Google Analytics Certified (2022)</strong></li>
+        <li><strong>Relevant Coursework:</strong> Data Structures, Algorithms, Database Design, Software Engineering</li>
+      </ul>
+      
+      <h3>💡 Tips để CV nổi bật</h3>
+      
+      <h4>1. Quantify achievements với số liệu</h4>
+      <ul>
+        <li>❌ "Improved website performance"</li>
+        <li>✅ "Reduced page load time by 35% from 3.2s to 2.1s"</li>
+      </ul>
+      
+      <h4>2. Sử dụng action verbs mạnh mẽ</h4>
+      <ul>
+        <li>Developed, Implemented, Optimized, Designed, Built, Deployed</li>
+        <li>Collaborated, Led, Mentored, Analyzed, Troubleshooted</li>
+      </ul>
+      
+      <h4>3. Customize cho từng vị trí</h4>
+      <ul>
+        <li>Đọc job description kỹ và highlight matching skills</li>
+        <li>Reorder technical skills theo priority của job</li>
+        <li>Adjust project descriptions để match requirements</li>
+      </ul>
+      
+      <h4>4. ATS-friendly formatting</h4>
+      <ul>
+        <li>Sử dụng standard section headings (Experience, Education, Skills)</li>
+        <li>Avoid images, tables, graphics trong CV</li>
+        <li>Use simple fonts: Arial, Calibri, Times New Roman</li>
+        <li>Save as PDF và .docx format</li>
+      </ul>
+      
+      <h3>❌ Những lỗi thường gặp cần tránh</h3>
+      
+      <ol>
+        <li><strong>Quá dài:</strong> CV junior nên 1-2 pages, senior max 3 pages</li>
+        <li><strong>Thiếu keywords:</strong> Không match với job requirements</li>
+        <li><strong>Generic:</strong> Dùng 1 CV cho tất cả positions</li>
+        <li><strong>Spelling/Grammar errors:</strong> Proofread nhiều lần</li>
+        <li><strong>Outdated technologies:</strong> Focus vào current tech stack</li>
+        <li><strong>Thiếu GitHub/Portfolio:</strong> Must-have cho IT positions</li>
+        <li><strong>Weak summary:</strong> Không showcase được value proposition</li>
+      </ol>
+      
+      <h3>🔧 Tools hỗ trợ tạo CV</h3>
+      
+      <h4>Free tools:</h4>
+      <ul>
+        <li><strong>Canva:</strong> Templates đẹp, easy to use</li>
+        <li><strong>Google Docs:</strong> Simple, ATS-friendly</li>
+        <li><strong>GitHub Pages:</strong> Tạo online CV/portfolio</li>
+      </ul>
+      
+      <h4>Premium tools:</h4>
+      <ul>
+        <li><strong>Adobe InDesign:</strong> Professional design</li>
+        <li><strong>Figma:</strong> Modern, collaborative design</li>
+        <li><strong>LaTeX:</strong> Academic, clean formatting</li>
+      </ul>
+      
+      <h3>📋 CV Review Checklist</h3>
+      
+      <h4>Content:</h4>
+      <ul>
+        <li>☑️ Contact information updated và professional</li>
+        <li>☑️ Summary statement compelling và relevant</li>
+        <li>☑️ Skills match với job requirements</li>
+        <li>☑️ Experience có quantified achievements</li>
+        <li>☑️ Projects showcase relevant technical skills</li>
+        <li>☑️ Education và certifications current</li>
+      </ul>
+      
+      <h4>Format:</h4>
+      <ul>
+        <li>☑️ Consistent formatting throughout</li>
+        <li>☑️ Easy to scan và read</li>
+        <li>☑️ Proper spelling và grammar</li>
+        <li>☑️ File naming convention: "FirstName_LastName_Position.pdf"</li>
+      </ul>
+      
+      <h3>🎯 Sample CV Template Structure</h3>
+      
+      <p><strong>Header Section</strong></p>
+      <p>John Doe<br/>
+      Frontend Developer<br/>
+      📧 john.doe@email.com | 📱 +84 123 456 789<br/>
+      🔗 linkedin.com/in/johndoe | 💻 github.com/johndoe</p>
+      
+      <p><strong>Professional Summary</strong><br/>
+      [2-3 sentences về experience và expertise]</p>
+      
+      <p><strong>Technical Skills</strong><br/>
+      [Organized by categories, most relevant first]</p>
+      
+      <p><strong>Professional Experience</strong><br/>
+      [Most recent first, with achievements và impact]</p>
+      
+      <p><strong>Key Projects</strong><br/>
+      [3-4 best projects với technical details]</p>
+      
+      <p><strong>Education & Certifications</strong><br/>
+      [Degree, relevant courses, certifications]</p>
+      
+      <p><em>Lưu ý: CV tốt là CV được customize cho từng vị trí ứng tuyển. Đầu tư thời gian để research company và position để tạo ra bản CV perfect match!</em></p>
+    `,
     image: 'https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=600&h=300&fit=crop&crop=center',
     category: 'Kỹ năng nghề nghiệp',
     author: 'Phạm Thị Hoa',
@@ -303,7 +474,245 @@ const mockNews = [
     id: '5',
     title: 'Mức lương ngành IT Việt Nam 2024: Báo cáo chi tiết theo vị trí',
     excerpt: 'Báo cáo toàn diện về mức lương trung bình của các vị trí IT phổ biến tại Việt Nam năm 2024, từ junior đến senior level.',
-    content: 'Ngành công nghệ thông tin tiếp tục là một trong những ngành có mức lương cao nhất...',
+    content: `
+      <h2>Báo cáo mức lương IT Việt Nam 2024 - Cập nhật mới nhất</h2>
+      
+      <p>Ngành công nghệ thông tin tiếp tục là một trong những ngành có mức lương cao nhất tại Việt Nam. Báo cáo này tổng hợp dữ liệu từ 500+ công ty và 10,000+ survey responses để đưa ra bức tranh toàn diện về mức lương IT trong năm 2024.</p>
+      
+      <h3>📊 Tổng quan thị trường lương IT 2024</h3>
+      
+      <h4>Tăng trưởng chung:</h4>
+      <ul>
+        <li>Mức lương trung bình tăng <strong>22%</strong> so với 2023</li>
+        <li>Bonus EOY trung bình: <strong>2-4 tháng lương</strong></li>
+        <li>Tỷ lệ tăng lương: <strong>15-30%</strong> khi switch job</li>
+        <li>Remote premium: <strong>+10-20%</strong> so với onsite</li>
+      </ul>
+      
+      <h3>💰 Bảng lương chi tiết theo vị trí</h3>
+      
+      <h4>🖥️ Frontend Developer</h4>
+      <ul>
+        <li><strong>Fresher (0-1 năm):</strong> 8-15 triệu VND</li>
+        <li><strong>Junior (1-2 năm):</strong> 12-20 triệu VND</li>
+        <li><strong>Mid-level (2-4 năm):</strong> 18-30 triệu VND</li>
+        <li><strong>Senior (4-6 năm):</strong> 25-45 triệu VND</li>
+        <li><strong>Lead/Principal (6+ năm):</strong> 40-70 triệu VND</li>
+      </ul>
+      
+      <h4>⚙️ Backend Developer</h4>
+      <ul>
+        <li><strong>Fresher (0-1 năm):</strong> 10-16 triệu VND</li>
+        <li><strong>Junior (1-2 năm):</strong> 14-22 triệu VND</li>
+        <li><strong>Mid-level (2-4 năm):</strong> 20-35 triệu VND</li>
+        <li><strong>Senior (4-6 năm):</strong> 30-50 triệu VND</li>
+        <li><strong>Lead/Principal (6+ năm):</strong> 45-80 triệu VND</li>
+      </ul>
+      
+      <h4>📱 Mobile Developer</h4>
+      <ul>
+        <li><strong>Fresher (0-1 năm):</strong> 9-14 triệu VND</li>
+        <li><strong>Junior (1-2 năm):</strong> 13-19 triệu VND</li>
+        <li><strong>Mid-level (2-4 năm):</strong> 18-32 triệu VND</li>
+        <li><strong>Senior (4-6 năm):</strong> 28-48 triệu VND</li>
+        <li><strong>Lead (6+ năm):</strong> 42-75 triệu VND</li>
+      </ul>
+      
+      <h4>🚀 DevOps Engineer</h4>
+      <ul>
+        <li><strong>Junior (1-2 năm):</strong> 15-25 triệu VND</li>
+        <li><strong>Mid-level (2-4 năm):</strong> 22-38 triệu VND</li>
+        <li><strong>Senior (4-6 năm):</strong> 35-55 triệu VND</li>
+        <li><strong>Lead (6+ năm):</strong> 50-85 triệu VND</li>
+      </ul>
+      
+      <h4>📊 Data Scientist/Analyst</h4>
+      <ul>
+        <li><strong>Fresher (0-1 năm):</strong> 10-16 triệu VND</li>
+        <li><strong>Junior (1-2 năm):</strong> 15-24 triệu VND</li>
+        <li><strong>Mid-level (2-4 năm):</strong> 22-38 triệu VND</li>
+        <li><strong>Senior (4-6 năm):</strong> 35-60 triệu VND</li>
+        <li><strong>Lead/Principal (6+ năm):</strong> 55-90 triệu VND</li>
+      </ul>
+      
+      <h4>🎨 UI/UX Designer</h4>
+      <ul>
+        <li><strong>Fresher (0-1 năm):</strong> 7-12 triệu VND</li>
+        <li><strong>Junior (1-2 năm):</strong> 11-18 triệu VND</li>
+        <li><strong>Mid-level (2-4 năm):</strong> 16-28 triệu VND</li>
+        <li><strong>Senior (4-6 năm):</strong> 25-42 triệu VND</li>
+        <li><strong>Lead (6+ năm):</strong> 38-65 triệu VND</li>
+      </ul>
+      
+      <h4>🔒 Cybersecurity Specialist</h4>
+      <ul>
+        <li><strong>Junior (1-2 năm):</strong> 16-26 triệu VND</li>
+        <li><strong>Mid-level (2-4 năm):</strong> 24-40 triệu VND</li>
+        <li><strong>Senior (4-6 năm):</strong> 38-65 triệu VND</li>
+        <li><strong>Expert (6+ năm):</strong> 60-100 triệu VND</li>
+      </ul>
+      
+      <h4>👨‍💼 Management Positions</h4>
+      <ul>
+        <li><strong>Team Lead (2-4 năm exp):</strong> 30-50 triệu VND</li>
+        <li><strong>Technical Manager (4-6 năm):</strong> 45-70 triệu VND</li>
+        <li><strong>Engineering Manager (6+ năm):</strong> 60-100 triệu VND</li>
+        <li><strong>CTO/VP Engineering:</strong> 80-200 triệu VND</li>
+      </ul>
+      
+      <h3>🏢 Mức lương theo loại công ty</h3>
+      
+      <h4>🌟 Tech Giants (Google, Microsoft, Amazon)</h4>
+      <ul>
+        <li><strong>Software Engineer:</strong> 40-80 triệu VND + stock options</li>
+        <li><strong>Senior SWE:</strong> 60-120 triệu VND + stocks</li>
+        <li><strong>Principal SWE:</strong> 100-200 triệu VND + stocks</li>
+      </ul>
+      
+      <h4>🚀 Unicorn Startups (Grab, Shopee, Tiki)</h4>
+      <ul>
+        <li><strong>Software Engineer:</strong> 25-50 triệu VND + equity</li>
+        <li><strong>Senior SWE:</strong> 40-75 triệu VND + equity</li>
+        <li><strong>Staff SWE:</strong> 65-110 triệu VND + equity</li>
+      </ul>
+      
+      <h4>🏪 Local Tech Companies</h4>
+      <ul>
+        <li><strong>Software Engineer:</strong> 15-35 triệu VND</li>
+        <li><strong>Senior SWE:</strong> 25-55 triệu VND</li>
+        <li><strong>Tech Lead:</strong> 40-80 triệu VND</li>
+      </ul>
+      
+      <h4>🏭 Outsourcing Companies</h4>
+      <ul>
+        <li><strong>Software Engineer:</strong> 12-28 triệu VND</li>
+        <li><strong>Senior SWE:</strong> 20-45 triệu VND</li>
+        <li><strong>Tech Lead:</strong> 35-65 triệu VND</li>
+      </ul>
+      
+      <h4>🏦 Banking/Finance Tech</h4>
+      <ul>
+        <li><strong>Software Engineer:</strong> 18-38 triệu VND</li>
+        <li><strong>Senior SWE:</strong> 30-58 triệu VND</li>
+        <li><strong>Tech Lead:</strong> 45-85 triệu VND</li>
+      </ul>
+      
+      <h3>🌍 So sánh lương theo thành phố</h3>
+      
+      <h4>🏙️ TP.HCM (Baseline: 100%)</h4>
+      <ul>
+        <li>Highest salary range</li>
+        <li>Most opportunities</li>
+        <li>Competitive market</li>
+      </ul>
+      
+      <h4>🏛️ Hà Nội (95-98% of HCM)</h4>
+      <ul>
+        <li>Slightly lower than HCM</li>
+        <li>Government projects premium</li>
+        <li>Banking/Finance focus</li>
+      </ul>
+      
+      <h4>🏖️ Đà Nẵng (85-90% of HCM)</h4>
+      <ul>
+        <li>Lower cost of living</li>
+        <li>Growing tech hub</li>
+        <li>Better work-life balance</li>
+      </ul>
+      
+      <h4>🌐 Remote (105-115% of HCM)</h4>
+      <ul>
+        <li>Premium for remote skills</li>
+        <li>International clients</li>
+        <li>Flexible working conditions</li>
+      </ul>
+      
+      <h3>📈 Factors ảnh hưởng đến mức lương</h3>
+      
+      <h4>🎓 Education Background</h4>
+      <ul>
+        <li><strong>University Degree:</strong> Baseline</li>
+        <li><strong>Top Universities (HCMUT, HCMUS):</strong> +10-15%</li>
+        <li><strong>International Degree:</strong> +15-25%</li>
+        <li><strong>Self-taught:</strong> Skills matter more than degree</li>
+      </ul>
+      
+      <h4>🏆 Certifications Impact</h4>
+      <ul>
+        <li><strong>AWS Certified:</strong> +15-20%</li>
+        <li><strong>Google Cloud Professional:</strong> +15-20%</li>
+        <li><strong>Azure Certified:</strong> +10-15%</li>
+        <li><strong>CISSP (Security):</strong> +20-30%</li>
+        <li><strong>PMP (Management):</strong> +10-15%</li>
+      </ul>
+      
+      <h4>🗣️ English Proficiency</h4>
+      <ul>
+        <li><strong>Basic English:</strong> Baseline</li>
+        <li><strong>Good Communication:</strong> +10-15%</li>
+        <li><strong>Fluent/Native:</strong> +20-30%</li>
+        <li><strong>Technical Writing:</strong> +15-25%</li>
+      </ul>
+      
+      <h4>💼 Industry Experience</h4>
+      <ul>
+        <li><strong>E-commerce:</strong> +5-10%</li>
+        <li><strong>Fintech:</strong> +10-20%</li>
+        <li><strong>Gaming:</strong> +5-15%</li>
+        <li><strong>Healthcare Tech:</strong> +10-15%</li>
+        <li><strong>AI/ML:</strong> +20-30%</li>
+      </ul>
+      
+      <h3>💡 Tips để tăng lương hiệu quả</h3>
+      
+      <h4>🎯 Short-term (3-6 months)</h4>
+      <ol>
+        <li><strong>Skill up:</strong> Learn hot technologies (AI, Cloud, DevOps)</li>
+        <li><strong>Certifications:</strong> Get recognized certificates</li>
+        <li><strong>Side projects:</strong> Build impressive portfolio</li>
+        <li><strong>Networking:</strong> Connect với professionals trong ngành</li>
+      </ol>
+      
+      <h4>🚀 Long-term (1-2 years)</h4>
+      <ol>
+        <li><strong>Job switching:</strong> Avg 20-30% salary increase</li>
+        <li><strong>Promotion:</strong> Move to senior/lead positions</li>
+        <li><strong>Specialization:</strong> Become expert in niche area</li>
+        <li><strong>International:</strong> Target foreign companies</li>
+      </ol>
+      
+      <h3>📋 Salary Negotiation Tips</h3>
+      
+      <h4>🔍 Research phase:</h4>
+      <ul>
+        <li>Use Glassdoor, ITviec, VietnamWorks salary data</li>
+        <li>Network với people trong same position</li>
+        <li>Know market rate cho your skills và experience</li>
+      </ul>
+      
+      <h4>💬 Negotiation tactics:</h4>
+      <ul>
+        <li><strong>Total compensation:</strong> Base + bonus + benefits + stock</li>
+        <li><strong>Non-salary perks:</strong> WFH, flexible hours, learning budget</li>
+        <li><strong>Performance-based:</strong> Tie increases to achievements</li>
+        <li><strong>Multiple offers:</strong> Create competitive leverage</li>
+      </ul>
+      
+      <h3>🔮 Salary Forecast 2025</h3>
+      
+      <h4>Expected trends:</h4>
+      <ul>
+        <li><strong>AI/ML roles:</strong> +25-35% growth</li>
+        <li><strong>Cybersecurity:</strong> +20-30% growth</li>
+        <li><strong>Cloud engineers:</strong> +15-25% growth</li>
+        <li><strong>Remote premium:</strong> Will become standard</li>
+        <li><strong>Freelance rates:</strong> Approaching employee salaries</li>
+      </ul>
+      
+      <p><em>Nguồn: Khảo sát từ 500+ công ty IT tại Việt Nam, surveys từ 10,000+ professionals, data từ JobStreet, VietnamWorks, ITviec, TopDev, Glassdoor (Q4/2024)</em></p>
+      
+      <p><strong>Lưu ý:</strong> Mức lương thực tế có thể thay đổi tùy theo company size, funding stage, và individual performance. Các con số trên chỉ mang tính tham khảo.</p>
+    `,
     image: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=600&h=300&fit=crop&crop=center',
     category: 'Báo cáo lương',
     author: 'Hoàng Minh Tâm',
@@ -316,7 +725,332 @@ const mockNews = [
     id: '6',
     title: 'Cơ hội việc làm tại Nhật Bản cho kỹ sư phần mềm Việt Nam',
     excerpt: 'Phân tích chi tiết về thị trường việc làm IT tại Nhật Bản, yêu cầu kỹ năng, quy trình xin visa và các chương trình hỗ trợ cho người Việt.',
-    content: 'Nhật Bản đang là điểm đến hấp dẫn cho nhiều kỹ sư phần mềm Việt Nam...',
+    content: `
+      <h2>Nhật Bản - Điểm đến IT hấp dẫn cho developer Việt Nam</h2>
+      
+      <p>Nhật Bản đang là điểm đến hấp dẫn cho nhiều kỹ sư phần mềm Việt Nam với mức lương cao, môi trường làm việc chuyên nghiệp và cơ hội phát triển sự nghiệp bền vững. Báo cáo này cung cấp roadmap chi tiết để pursue career tại đất nước mặt trời mọc.</p>
+      
+      <h3>🗾 Tổng quan thị trường IT Nhật Bản</h3>
+      
+      <h4>📊 Nhu cầu nhân lực:</h4>
+      <ul>
+        <li><strong>Thiếu hụt:</strong> 800,000+ IT engineers đến 2030</li>
+        <li><strong>Foreign workers:</strong> 40% companies muốn hire người nước ngoài</li>
+        <li><strong>Vietnam ranking:</strong> #2 preferred country (sau India)</li>
+        <li><strong>Growth sectors:</strong> AI, IoT, DX (Digital Transformation), Gaming</li>
+      </ul>
+      
+      <h4>💰 Mức lương competitive:</h4>
+      <ul>
+        <li><strong>Fresh Graduate:</strong> ¥3,000,000 - ¥4,500,000/năm (560-840 triệu VND)</li>
+        <li><strong>3-5 years exp:</strong> ¥4,500,000 - ¥7,000,000/năm (840-1,300 triệu VND)</li>
+        <li><strong>Senior (5+ years):</strong> ¥7,000,000 - ¥12,000,000/năm (1,300-2,240 triệu VND)</li>
+        <li><strong>Lead/Manager:</strong> ¥10,000,000 - ¥20,000,000/năm (1,870-3,740 triệu VND)</li>
+      </ul>
+      
+      <h3>🎯 Vị trí đang hot tại Nhật Bản</h3>
+      
+      <h4>🔥 Most in-demand positions:</h4>
+      
+      <h4>1. Web Developer</h4>
+      <ul>
+        <li><strong>Tech stack:</strong> React, Vue.js, Angular, Node.js</li>
+        <li><strong>Salary range:</strong> ¥3.5M - ¥8M</li>
+        <li><strong>Companies:</strong> Rakuten, Mercari, SmartNews</li>
+      </ul>
+      
+      <h4>2. Mobile Developer</h4>
+      <ul>
+        <li><strong>Platforms:</strong> iOS (Swift), Android (Kotlin), Flutter</li>
+        <li><strong>Salary range:</strong> ¥4M - ¥9M</li>
+        <li><strong>Companies:</strong> CyberAgent, DeNA, Mixi</li>
+      </ul>
+      
+      <h4>3. Data Engineer/Scientist</h4>
+      <ul>
+        <li><strong>Skills:</strong> Python, SQL, AWS, Machine Learning</li>
+        <li><strong>Salary range:</strong> ¥5M - ¥12M</li>
+        <li><strong>Companies:</strong> SoftBank, LINE, Yahoo Japan</li>
+      </ul>
+      
+      <h4>4. DevOps/Infrastructure</h4>
+      <ul>
+        <li><strong>Tools:</strong> AWS, GCP, Docker, Kubernetes</li>
+        <li><strong>Salary range:</strong> ¥5M - ¥11M</li>
+        <li><strong>Companies:</strong> Wantedly, Freee, Money Forward</li>
+      </ul>
+      
+      <h4>5. Game Developer</h4>
+      <ul>
+        <li><strong>Engines:</strong> Unity, Unreal Engine, Cocos2d</li>
+        <li><strong>Salary range:</strong> ¥4M - ¥10M</li>
+        <li><strong>Companies:</strong> Nintendo, Square Enix, Bandai Namco</li>
+      </ul>
+      
+      <h3>🎌 Yêu cầu kỹ năng cần thiết</h3>
+      
+      <h4>💻 Technical Skills</h4>
+      
+      <h4>Must-have:</h4>
+      <ul>
+        <li><strong>Programming:</strong> Java, Python, JavaScript (most popular)</li>
+        <li><strong>Web frameworks:</strong> Spring Boot, React, Vue.js</li>
+        <li><strong>Database:</strong> MySQL, PostgreSQL, Oracle</li>
+        <li><strong>Version control:</strong> Git (mandatory)</li>
+        <li><strong>Testing:</strong> Unit testing, automated testing</li>
+      </ul>
+      
+      <h4>Nice-to-have:</h4>
+      <ul>
+        <li><strong>Cloud platforms:</strong> AWS, GCP, Azure</li>
+        <li><strong>Containers:</strong> Docker, Kubernetes</li>
+        <li><strong>Agile/Scrum:</strong> Project management methodologies</li>
+        <li><strong>AI/ML:</strong> TensorFlow, PyTorch, scikit-learn</li>
+      </ul>
+      
+      <h4>🗣️ Language Requirements</h4>
+      
+      <h4>Japanese proficiency:</h4>
+      <ul>
+        <li><strong>N3 level:</strong> Minimum cho most positions</li>
+        <li><strong>N2 level:</strong> Comfortable cho daily work</li>
+        <li><strong>N1 level:</strong> Leadership positions, client-facing roles</li>
+        <li><strong>Business Japanese:</strong> Essential cho long-term success</li>
+      </ul>
+      
+      <h4>English proficiency:</h4>
+      <ul>
+        <li><strong>Reading technical docs:</strong> Mandatory</li>
+        <li><strong>Communication:</strong> Global companies prefer good English</li>
+        <li><strong>TOEIC 700+:</strong> Competitive advantage</li>
+      </ul>
+      
+      <h3>📋 Quy trình ứng tuyển step-by-step</h3>
+      
+      <h4>🎯 Phase 1: Preparation (3-6 months)</h4>
+      
+      <h4>1. Language preparation:</h4>
+      <ul>
+        <li>Study Japanese to N3/N2 level</li>
+        <li>Practice business Japanese phrases</li>
+        <li>Learn technical vocabulary trong Japanese</li>
+      </ul>
+      
+      <h4>2. Technical skills:</h4>
+      <ul>
+        <li>Master popular tech stack tại Nhật (Java, Spring Boot)</li>
+        <li>Build portfolio với Japanese-style projects</li>
+        <li>Contribute to open source projects</li>
+      </ul>
+      
+      <h4>3. Cultural knowledge:</h4>
+      <ul>
+        <li>Understand Japanese work culture (Hou-Ren-So, Kaizen)</li>
+        <li>Learn về business etiquette</li>
+        <li>Research target companies thoroughly</li>
+      </ul>
+      
+      <h4>🔍 Phase 2: Job Search (1-3 months)</h4>
+      
+      <h4>Best job platforms:</h4>
+      <ul>
+        <li><strong>Wantedly:</strong> Startup-focused, English-friendly</li>
+        <li><strong>Green:</strong> IT-specific job board</li>
+        <li><strong>Bizreach:</strong> Senior positions, headhunting</li>
+        <li><strong>Indeed Japan:</strong> Comprehensive listings</li>
+        <li><strong>LinkedIn:</strong> International companies</li>
+        <li><strong>Gaijinpot Jobs:</strong> Foreigner-friendly positions</li>
+      </ul>
+      
+      <h4>📝 Phase 3: Application Process</h4>
+      
+      <h4>Japanese-style CV (Rirekisho):</h4>
+      <ul>
+        <li><strong>Format:</strong> Standardized template với photo</li>
+        <li><strong>Handwritten:</strong> Some traditional companies prefer này</li>
+        <li><strong>Personal info:</strong> Include age, marital status (legal requirement)</li>
+        <li><strong>Motivation letter:</strong> Explain why Japan, why this company</li>
+      </ul>
+      
+      <h4>🎤 Phase 4: Interview Process</h4>
+      
+      <h4>Typical interview stages:</h4>
+      <ol>
+        <li><strong>Phone/Video screening (30 mins):</strong> Basic Japanese, motivation</li>
+        <li><strong>Technical interview (60-90 mins):</strong> Coding, system design</li>
+        <li><strong>HR interview (45 mins):</strong> Cultural fit, career goals</li>
+        <li><strong>Final interview (60 mins):</strong> Meet with management team</li>
+      </ol>
+      
+      <h4>Common interview questions:</h4>
+      <ul>
+        <li>"Naze Nihon ni kimashita ka?" (Why did you come to Japan?)</li>
+        <li>"Shougai mokuhyou wa nan desu ka?" (What are your career goals?)</li>
+        <li>"Team work no keiken wa?" (Tell us about teamwork experience)</li>
+        <li>Technical questions trong Japanese/English</li>
+      </ul>
+      
+      <h3>🛂 Visa Process Guide</h3>
+      
+      <h4>📄 Types of work visas:</h4>
+      
+      <h4>1. Engineer/Specialist in Humanities visa</h4>
+      <ul>
+        <li><strong>Duration:</strong> 1-5 years (renewable)</li>
+        <li><strong>Requirements:</strong> University degree OR 10+ years experience</li>
+        <li><strong>Sponsor:</strong> Japanese company must sponsor</li>
+      </ul>
+      
+      <h4>2. Highly Skilled Professional visa</h4>
+      <ul>
+        <li><strong>Point system:</strong> 70+ points (education, experience, salary)</li>
+        <li><strong>Benefits:</strong> Path to permanent residency, family support</li>
+        <li><strong>Fast track:</strong> PR after 1-3 years (vs normal 10 years)</li>
+      </ul>
+      
+      <h4>📋 Required documents:</h4>
+      <ul>
+        <li>University diploma (notarized translation)</li>
+        <li>Certificate of Eligibility (sponsored by employer)</li>
+        <li>Employment contract</li>
+        <li>Financial proof</li>
+        <li>Health certificate</li>
+        <li>Background check</li>
+      </ul>
+      
+      <h3>🏢 Top companies hiring Vietnamese developers</h3>
+      
+      <h4>🌟 Global Tech Giants:</h4>
+      <ul>
+        <li><strong>Google Japan:</strong> Competitive salary, English environment</li>
+        <li><strong>Microsoft Japan:</strong> Cloud focus, good work-life balance</li>
+        <li><strong>Amazon Japan:</strong> E-commerce, AWS opportunities</li>
+        <li><strong>Meta Japan:</strong> Social media, VR/AR projects</li>
+      </ul>
+      
+      <h4>🇯🇵 Major Japanese Companies:</h4>
+      <ul>
+        <li><strong>Rakuten:</strong> E-commerce giant, English-friendly</li>
+        <li><strong>SoftBank:</strong> Telecom, AI investments</li>
+        <li><strong>NTT Data:</strong> IT consulting, government projects</li>
+        <li><strong>Fujitsu:</strong> Enterprise solutions, cloud services</li>
+      </ul>
+      
+      <h4>🚀 Hot Startups:</h4>
+      <ul>
+        <li><strong>Mercari:</strong> C2C marketplace, global expansion</li>
+        <li><strong>SmartNews:</strong> News aggregator, AI-driven</li>
+        <li><strong>Freee:</strong> Cloud accounting software</li>
+        <li><strong>Money Forward:</strong> Fintech, personal finance</li>
+      </ul>
+      
+      <h4>🎮 Gaming Companies:</h4>
+      <ul>
+        <li><strong>Nintendo:</strong> Console games, innovative gameplay</li>
+        <li><strong>Square Enix:</strong> RPG specialists, Final Fantasy</li>
+        <li><strong>Bandai Namco:</strong> Entertainment, mobile games</li>
+        <li><strong>Cygames:</strong> Mobile gaming, Granblue Fantasy</li>
+      </ul>
+      
+      <h3>🏙️ Best cities cho IT careers</h3>
+      
+      <h4>🌆 Tokyo (Best overall)</h4>
+      <ul>
+        <li><strong>Pros:</strong> Most opportunities, highest salaries, international environment</li>
+        <li><strong>Cons:</strong> Expensive living, crowded, high competition</li>
+        <li><strong>Average salary:</strong> ¥5M - ¥12M</li>
+      </ul>
+      
+      <h4>🏯 Osaka (Balanced option)</h4>
+      <ul>
+        <li><strong>Pros:</strong> Lower cost of living, good tech scene, friendly people</li>
+        <li><strong>Cons:</strong> Fewer opportunities than Tokyo</li>
+        <li><strong>Average salary:</strong> ¥4M - ¥9M</li>
+      </ul>
+      
+      <h4>💡 Fukuoka (Startup hub)</h4>
+      <ul>
+        <li><strong>Pros:</strong> Government support for startups, affordable, quality of life</li>
+        <li><strong>Cons:</strong> Limited to startups, language barrier</li>
+        <li><strong>Average salary:</strong> ¥3.5M - ¥7M</li>
+      </ul>
+      
+      <h3>💡 Tips for success tại Nhật Bản</h3>
+      
+      <h4>🎯 Career development:</h4>
+      <ol>
+        <li><strong>Master Japanese:</strong> Essential for long-term success</li>
+        <li><strong>Understand hierarchy:</strong> Respect senpai-kohai relationships</li>
+        <li><strong>Continuous learning:</strong> Stay updated với latest technologies</li>
+        <li><strong>Network actively:</strong> Attend tech meetups, conferences</li>
+        <li><strong>Consider management track:</strong> Bridge role between Vietnamese và Japanese teams</li>
+      </ol>
+      
+      <h4>🏠 Living in Japan:</h4>
+      <ul>
+        <li><strong>Housing:</strong> Company-sponsored housing or monthly apartments</li>
+        <li><strong>Healthcare:</strong> National Health Insurance (covers 70%)</li>
+        <li><strong>Transportation:</strong> Excellent public transport system</li>
+        <li><strong>Banking:</strong> Most banks now accept foreigners</li>
+        <li><strong>Taxes:</strong> Progressive tax rate 5-45% + local taxes</li>
+      </ul>
+      
+      <h3>📚 Resources để prepare</h3>
+      
+      <h4>📖 Japanese learning:</h4>
+      <ul>
+        <li><strong>Genki textbooks:</strong> Structured grammar learning</li>
+        <li><strong>Anki/Memrise:</strong> Vocabulary building</li>
+        <li><strong>HelloTalk:</strong> Practice với native speakers</li>
+        <li><strong>NHK News:</strong> Current events trong simple Japanese</li>
+      </ul>
+      
+      <h4>💻 Technical preparation:</h4>
+      <ul>
+        <li><strong>Paiza:</strong> Japanese coding challenges</li>
+        <li><strong>AtCoder:</strong> Competitive programming</li>
+        <li><strong>Qiita:</strong> Japanese tech blog platform</li>
+        <li><strong>Tech meetups:</strong> Tokyo Tech Scene, Java Ja Night</li>
+      </ul>
+      
+      <h4>🌐 Community support:</h4>
+      <ul>
+        <li><strong>Facebook groups:</strong> Vietnamese IT in Japan</li>
+        <li><strong>Discord servers:</strong> Tech communities</li>
+        <li><strong>LinkedIn groups:</strong> Professional networking</li>
+        <li><strong>Local Vietnamese communities:</strong> Cultural support</li>
+      </ul>
+      
+      <h3>⚠️ Common challenges và solutions</h3>
+      
+      <h4>🗣️ Language barrier:</h4>
+      <ul>
+        <li><strong>Challenge:</strong> Technical discussions trong Japanese</li>
+        <li><strong>Solution:</strong> Prepare technical vocabulary list, practice presentations</li>
+      </ul>
+      
+      <h4>🏢 Work culture:</h4>
+      <ul>
+        <li><strong>Challenge:</strong> Long working hours, strict hierarchy</li>
+        <li><strong>Solution:</strong> Choose international companies, understand expectations</li>
+      </ul>
+      
+      <h4>💰 Cost of living:</h4>
+      <ul>
+        <li><strong>Challenge:</strong> Expensive housing, especially in Tokyo</li>
+        <li><strong>Solution:</strong> Company housing, share houses, suburbs</li>
+      </ul>
+      
+      <h4>🏠 Social integration:</h4>
+      <ul>
+        <li><strong>Challenge:</strong> Making Japanese friends, cultural differences</li>
+        <li><strong>Solution:</strong> Join clubs, volunteer activities, learn cultural norms</li>
+      </ul>
+      
+      <p><strong>Kết luận:</strong> Nhật Bản offers excellent opportunities cho Vietnamese developers với proper preparation. Success requires commitment to language learning, cultural adaptation, và continuous skill development. Với strategic approach và persistent effort, career tại Nhật có thể very rewarding both professionally và personally.</p>
+      
+      <p><em>Nguồn: JETRO (Japan External Trade Organization), JASSO (Japan Student Services Organization), Japanese Ministry of Justice Immigration data, interviews với 50+ Vietnamese developers working in Japan</em></p>
+    `,
     image: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=600&h=300&fit=crop&crop=center',
     category: 'Việc làm quốc tế',
     author: 'Ngô Văn Thành',
@@ -571,6 +1305,20 @@ export default function NewsPage() {
 
   const featuredArticles = articles.filter(article => article.featured)
   const regularArticles = articles.filter(article => !article.featured)
+  
+  // Pagination logic
+  const articlesPerPage = 3
+  const totalPages = Math.ceil(regularArticles.length / articlesPerPage)
+  const startIndex = (currentPage - 1) * articlesPerPage
+  const endIndex = startIndex + articlesPerPage
+  const currentPageArticles = regularArticles.slice(startIndex, endIndex)
+
+  // Reset to page 1 if current page exceeds total pages
+  useEffect(() => {
+    if (currentPage > totalPages && totalPages > 0) {
+      setCurrentPage(1)
+    }
+  }, [currentPage, totalPages])
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -659,7 +1407,7 @@ export default function NewsPage() {
           <div className="lg:col-span-3">
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-2xl font-bold text-gray-900">
-                Tất cả tin tức ({mockNews.length} bài viết)
+                Tất cả tin tức ({regularArticles.length} bài viết)
               </h2>
               <select 
                 value={sortBy}
@@ -673,44 +1421,43 @@ export default function NewsPage() {
             </div>
 
             <div className="grid gap-6">
-              {regularArticles.map((article) => (
+              {currentPageArticles.map((article) => (
                 <NewsCard key={article.id} article={article} onArticleClick={handleArticleClick} />
               ))}
             </div>
 
             {/* Pagination */}
-            <div className="flex justify-center items-center space-x-2 pt-8">
-              <button 
-                onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
-                disabled={currentPage === 1}
-                className="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                Trước
-              </button>
-              {[1, 2, 3, '...', 10].map((page, index) => (
-                <button
-                  key={index}
-                  onClick={() => typeof page === 'number' && handlePageChange(page)}
-                  disabled={typeof page !== 'number'}
-                  className={`px-3 py-2 text-sm font-medium rounded-lg ${
-                    page === currentPage
-                      ? 'text-white bg-blue-600 border border-blue-600'
-                      : typeof page === 'number'
-                      ? 'text-gray-500 bg-white border border-gray-300 hover:bg-gray-50'
-                      : 'text-gray-400 bg-white border border-gray-300 cursor-default'
-                  }`}
+            {totalPages > 1 && (
+              <div className="flex justify-center items-center space-x-2 pt-8">
+                <button 
+                  onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
+                  disabled={currentPage === 1}
+                  className="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {page}
+                  Trước
                 </button>
-              ))}
-              <button 
-                onClick={() => handlePageChange(Math.min(10, currentPage + 1))}
-                disabled={currentPage === 10}
-                className="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                Sau
-              </button>
-            </div>
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                  <button
+                    key={page}
+                    onClick={() => handlePageChange(page)}
+                    className={`px-3 py-2 text-sm font-medium rounded-lg ${
+                      page === currentPage
+                        ? 'text-white bg-blue-600 border border-blue-600'
+                        : 'text-gray-500 bg-white border border-gray-300 hover:bg-gray-50'
+                    }`}
+                  >
+                    {page}
+                  </button>
+                ))}
+                <button 
+                  onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))}
+                  disabled={currentPage === totalPages}
+                  className="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  Sau
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>
