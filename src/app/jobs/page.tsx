@@ -4,7 +4,7 @@ import { useSearchParams } from 'next/navigation'
 import JobCard from '@/components/JobCard'
 import { Search, Filter } from 'lucide-react'
 
-// Mock data for demonstration
+// Mock data for demonstration - expanded for pagination testing
 const mockJobs = [
   {
     id: '1',
@@ -74,6 +74,160 @@ const mockJobs = [
     createdAt: new Date('2024-01-05'),
     employer: {
       company: 'Global Marketing Solutions'
+    }
+  },
+  {
+    id: '6',
+    title: 'Backend Developer - Node.js',
+    description: 'Phát triển API và hệ thống backend với Node.js, Express và MongoDB. Cần có kinh nghiệm với microservices và cloud platforms.',
+    salary: '18,000,000 - 30,000,000 VND',
+    country: 'Việt Nam',
+    jobType: 'FULLTIME',
+    category: 'Công nghệ thông tin',
+    skills: ['Node.js', 'Express', 'MongoDB', 'AWS'],
+    createdAt: new Date('2024-01-14'),
+    employer: {
+      company: 'CloudTech Vietnam'
+    }
+  },
+  {
+    id: '7',
+    title: 'DevOps Engineer - Seoul',
+    description: 'Quản lý infrastructure và CI/CD pipelines tại Seoul, Hàn Quốc. Làm việc với Kubernetes, Docker và các công nghệ cloud.',
+    salary: '₩35,000,000 - ₩50,000,000',
+    country: 'Hàn Quốc',
+    jobType: 'FULLTIME',
+    category: 'Phần mềm',
+    skills: ['Kubernetes', 'Docker', 'Jenkins', 'AWS'],
+    createdAt: new Date('2024-01-13'),
+    employer: {
+      company: 'Seoul DevOps Co.'
+    }
+  },
+  {
+    id: '8',
+    title: 'Mobile App Developer - Flutter',
+    description: 'Phát triển ứng dụng di động cross-platform với Flutter. Làm việc trong team agile và phát triển sản phẩm từ ý tưởng đến deployment.',
+    salary: '16,000,000 - 28,000,000 VND',
+    country: 'Việt Nam',
+    jobType: 'FULLTIME',
+    category: 'Công nghệ thông tin',
+    skills: ['Flutter', 'Dart', 'Firebase', 'REST APIs'],
+    createdAt: new Date('2024-01-11'),
+    employer: {
+      company: 'Mobile Innovations'
+    }
+  },
+  {
+    id: '9',
+    title: 'AI/ML Engineer - Research Lab',
+    description: 'Nghiên cứu và phát triển các mô hình Machine Learning và Deep Learning. Làm việc với datasets lớn và implement các algorithms tiên tiến.',
+    salary: '25,000,000 - 40,000,000 VND',
+    country: 'Việt Nam',
+    jobType: 'FULLTIME',
+    category: 'Dữ liệu',
+    skills: ['Python', 'TensorFlow', 'PyTorch', 'Computer Vision'],
+    createdAt: new Date('2024-01-09'),
+    employer: {
+      company: 'AI Research Lab'
+    }
+  },
+  {
+    id: '10',
+    title: 'Product Manager - Fintech',
+    description: 'Quản lý sản phẩm fintech, làm việc với team development để deliver các tính năng mới. Cần hiểu biết về banking và payment systems.',
+    salary: '22,000,000 - 35,000,000 VND',
+    country: 'Việt Nam',
+    jobType: 'FULLTIME',
+    category: 'Tài chính',
+    skills: ['Product Management', 'Fintech', 'Agile', 'Data Analysis'],
+    createdAt: new Date('2024-01-07'),
+    employer: {
+      company: 'FinTech Solutions'
+    }
+  },
+  {
+    id: '11',
+    title: 'Cybersecurity Specialist - Remote',
+    description: 'Bảo mật hệ thống và network, phân tích threats và implement security measures. Làm việc remote với team quốc tế.',
+    salary: '$2,500 - $4,000',
+    country: 'Remote',
+    jobType: 'FULLTIME',
+    category: 'Công nghệ thông tin',
+    skills: ['Network Security', 'Penetration Testing', 'CISSP', 'Incident Response'],
+    createdAt: new Date('2024-01-06'),
+    employer: {
+      company: 'CyberGuard International'
+    }
+  },
+  {
+    id: '12',
+    title: 'QA Engineer - Manual & Automation',
+    description: 'Thực hiện testing manual và automation cho web applications. Viết test cases và maintain test frameworks.',
+    salary: '12,000,000 - 22,000,000 VND',
+    country: 'Việt Nam',
+    jobType: 'FULLTIME',
+    category: 'Phần mềm',
+    skills: ['Manual Testing', 'Selenium', 'Test Automation', 'API Testing'],
+    createdAt: new Date('2024-01-04'),
+    employer: {
+      company: 'Quality Assurance Pro'
+    }
+  },
+  {
+    id: '13',
+    title: 'Business Analyst - Banking',
+    description: 'Phân tích business requirements và thiết kế solutions cho ngành banking. Làm việc với stakeholders để hiểu và document processes.',
+    salary: '15,000,000 - 25,000,000 VND',
+    country: 'Việt Nam',
+    jobType: 'FULLTIME',
+    category: 'Tài chính',
+    skills: ['Business Analysis', 'Banking Domain', 'Requirements Gathering', 'Process Modeling'],
+    createdAt: new Date('2024-01-03'),
+    employer: {
+      company: 'Banking Solutions Corp'
+    }
+  },
+  {
+    id: '14',
+    title: 'Game Developer - Unity',
+    description: 'Phát triển games mobile với Unity engine. Làm việc trong team creative để tạo ra những game experiences thú vị.',
+    salary: '14,000,000 - 26,000,000 VND',
+    country: 'Việt Nam',
+    jobType: 'FULLTIME',
+    category: 'Thiết kế',
+    skills: ['Unity', 'C#', 'Game Design', '3D Modeling'],
+    createdAt: new Date('2024-01-02'),
+    employer: {
+      company: 'Game Studio Vietnam'
+    }
+  },
+  {
+    id: '15',
+    title: 'Cloud Architect - AWS',
+    description: 'Thiết kế và implement cloud infrastructure trên AWS. Lead technical decisions và mentor junior developers.',
+    salary: '30,000,000 - 50,000,000 VND',
+    country: 'Việt Nam',
+    jobType: 'FULLTIME',
+    category: 'Công nghệ thông tin',
+    skills: ['AWS', 'Cloud Architecture', 'Terraform', 'Microservices'],
+    createdAt: new Date('2024-01-01'),
+    employer: {
+      company: 'Cloud Excellence'
+    }
+  },
+  {
+    id: '16',
+    title: 'Nhân Viên Bán Hàng tại Showroom Q.2',
+    description: 'MÔ TẢ CÔNG VIỆC - Tư vấn sản phẩm phù hợp với nhu cầu của khách hàng. - Thuyết phục khách hàng mua sản phẩm. - Làm báo giá, lên đơn hàng cho khách. - Chăm sóc và duy trì mối quan hệ với khách hàng. - Trưng bày, chăm sóc, bảo quản sản phẩm theo quy định. - Thực hiện một số công việc khác theo yêu cầu cấp trên. **** Lương: thỏa thuận ****',
+    salary: 'Thỏa thuận',
+    country: 'Việt Nam',
+    jobType: 'FULLTIME',
+    category: 'Thị trường việc làm',
+    skills: ['Bán hàng', 'Tư vấn khách hàng', 'Chăm sóc khách hàng'],
+    createdAt: new Date('2025-07-23'),
+    employer: {
+      company: 'CÔNG TY CP XNK HÀNG VIỆT'
     }
   }
 ]
@@ -259,19 +413,76 @@ function JobsList({
                 Trước
               </button>
               
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                <button
-                  key={page}
-                  onClick={() => onPageChange(page)}
-                  className={`px-3 py-2 text-sm font-medium rounded-lg ${
-                    page === currentPage
-                      ? 'text-white bg-blue-600 border border-blue-600'
-                      : 'text-gray-500 bg-white border border-gray-300 hover:bg-gray-50'
-                  }`}
-                >
-                  {page}
-                </button>
-              ))}
+              {/* Page Numbers */}
+              {(() => {
+                const maxVisiblePages = 5
+                let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2))
+                let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1)
+                
+                // Adjust if we're near the end
+                if (endPage - startPage + 1 < maxVisiblePages) {
+                  startPage = Math.max(1, endPage - maxVisiblePages + 1)
+                }
+                
+                const pages = []
+                
+                // Always show page 1 if not in range
+                if (startPage > 1) {
+                  pages.push(
+                    <button
+                      key={1}
+                      onClick={() => onPageChange(1)}
+                      className="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50"
+                    >
+                      1
+                    </button>
+                  )
+                  
+                  if (startPage > 2) {
+                    pages.push(
+                      <span key="ellipsis1" className="px-2 text-gray-400">...</span>
+                    )
+                  }
+                }
+                
+                // Show page numbers in range
+                for (let i = startPage; i <= endPage; i++) {
+                  pages.push(
+                    <button
+                      key={i}
+                      onClick={() => onPageChange(i)}
+                      className={`px-3 py-2 text-sm font-medium rounded-lg ${
+                        i === currentPage
+                          ? 'text-white bg-blue-600 border border-blue-600'
+                          : 'text-gray-500 bg-white border border-gray-300 hover:bg-gray-50'
+                      }`}
+                    >
+                      {i}
+                    </button>
+                  )
+                }
+                
+                // Always show last page if not in range
+                if (endPage < totalPages) {
+                  if (endPage < totalPages - 1) {
+                    pages.push(
+                      <span key="ellipsis2" className="px-2 text-gray-400">...</span>
+                    )
+                  }
+                  
+                  pages.push(
+                    <button
+                      key={totalPages}
+                      onClick={() => onPageChange(totalPages)}
+                      className="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50"
+                    >
+                      {totalPages}
+                    </button>
+                  )
+                }
+                
+                return pages
+              })()}
               
               <button 
                 onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
