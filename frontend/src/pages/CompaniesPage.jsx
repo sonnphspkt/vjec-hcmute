@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import { BarChart3, Building2, Dna, Search, ShieldCheck } from 'lucide-react';
+import { useQuery } from '@tanstack/react-query';
+import api from '@/services/api';
 
 const companyValues = [
   { title: 'Hồ sơ thương hiệu tuyển dụng', text: 'Giới thiệu doanh nghiệp, lĩnh vực, văn hóa và nhu cầu nhân lực.', icon: Building2 },
@@ -8,9 +10,17 @@ const companyValues = [
   { title: 'Analytics tuyển dụng', text: 'Nhìn xu hướng kỹ năng, nhu cầu tuyển dụng và hiệu quả tin đăng.', icon: BarChart3 },
 ];
 
-const CompaniesPage = () => (
-  <div className="min-h-screen bg-slate-50 px-4 py-24 pt-28 dark:bg-dark-500">
-    <section className="mx-auto max-w-6xl">
+const CompaniesPage = () => {
+  const { data, isLoading } = useQuery({
+    queryKey: ['companies', 'public'],
+    queryFn: () => api.get('/companies', { params: { limit: 24 } }).then((r) => r.data),
+  });
+
+  const companies = data?.data || [];
+
+  return (
+    <div className="min-h-screen bg-slate-50 px-4 py-24 pt-28 dark:bg-dark-500">
+      <section className="mx-auto max-w-6xl">
       <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
         <div>
           <p className="text-sm font-semibold uppercase tracking-wider text-primary-600 dark:text-primary-400">
@@ -67,6 +77,71 @@ const CompaniesPage = () => (
         ))}
       </div>
 
+      <section className="mt-16">
+        <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-wider text-primary-600 dark:text-primary-400">
+              Đối tác tuyển dụng
+            </p>
+            <h2 className="mt-2 text-3xl font-bold text-slate-900 dark:text-white">Doanh nghiệp đang tham gia</h2>
+            <p className="mt-2 max-w-2xl text-slate-600 dark:text-gray-400">
+              Dữ liệu mẫu minh họa các nhóm doanh nghiệp phần mềm, nhúng, dữ liệu, tự động hóa và sản xuất thông minh.
+            </p>
+          </div>
+          <Link to="/jobs" className="text-sm font-semibold text-primary-600 hover:underline dark:text-primary-400">
+            Xem việc làm đang mở
+          </Link>
+        </div>
+
+        {isLoading ? (
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <div key={i} className="h-48 animate-pulse rounded-xl bg-slate-200 dark:bg-white/10" />
+            ))}
+          </div>
+        ) : companies.length === 0 ? (
+          <p className="text-slate-600 dark:text-gray-400">Chưa có dữ liệu doanh nghiệp. Hãy chạy rich seed backend.</p>
+        ) : (
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {companies.map((company) => (
+              <article key={company._id} className="glass rounded-xl p-5 card-hover">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <h3 className="font-bold text-slate-900 dark:text-white">{company.companyName}</h3>
+                    <p className="mt-1 text-sm text-slate-500 dark:text-gray-500">
+                      {company.industry || 'Technology'} · {company.size || 'Đang cập nhật'}
+                    </p>
+                  </div>
+                  {company.isVerified ? (
+                    <span className="rounded-full bg-emerald-500/10 px-2.5 py-1 text-xs font-medium text-emerald-700 dark:text-emerald-200">
+                      Verified
+                    </span>
+                  ) : null}
+                </div>
+                <p className="mt-4 line-clamp-3 text-sm leading-6 text-slate-600 dark:text-gray-400">
+                  {company.description}
+                </p>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {(company.benefits || []).slice(0, 3).map((benefit) => (
+                    <span key={benefit} className="rounded-full bg-slate-100 px-2.5 py-1 text-xs text-slate-700 dark:bg-white/10 dark:text-gray-300">
+                      {benefit}
+                    </span>
+                  ))}
+                </div>
+                <div className="mt-5 flex items-center justify-between text-sm">
+                  <span className="text-slate-500 dark:text-gray-500">
+                    {company.stats?.activeJobs || 0} tin đang mở
+                  </span>
+                  <Link to="/jobs" className="font-medium text-primary-600 hover:underline dark:text-primary-400">
+                    Xem cơ hội
+                  </Link>
+                </div>
+              </article>
+            ))}
+          </div>
+        )}
+      </section>
+
       <div className="mt-12 rounded-xl bg-slate-900 p-6 text-white dark:bg-white/10">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
@@ -78,8 +153,9 @@ const CompaniesPage = () => (
           </Link>
         </div>
       </div>
-    </section>
-  </div>
-);
+      </section>
+    </div>
+  );
+};
 
 export default CompaniesPage;
