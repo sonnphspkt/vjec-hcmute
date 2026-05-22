@@ -205,3 +205,94 @@ GitHub Actions sẽ tự deploy.
 ```bash
 pm2 logs ute-job-backend
 ```
+
+## 8. Nếu server không có IP public: deploy backend lên Render Free
+
+GitHub chỉ lưu code, không chạy backend. Nếu server nội bộ không có IP public, frontend Vercel sẽ không gọi được API trên server đó. Cách miễn phí dễ nhất là deploy backend từ GitHub lên Render.
+
+### 8.1. Chuẩn bị database MongoDB Atlas
+
+Tạo MongoDB Atlas Free cluster, sau đó lấy URI dạng:
+
+```env
+mongodb+srv://USER:PASSWORD@CLUSTER/ute-job-platform
+```
+
+Trong Network Access của Atlas, cho phép Render kết nối. Khi demo có thể dùng:
+
+```text
+0.0.0.0/0
+```
+
+### 8.2. Tạo Render Web Service
+
+Vào:
+
+```text
+https://render.com
+```
+
+Chọn:
+
+```text
+New -> Web Service -> Connect GitHub repo sonnphspkt/vjec-hcmute
+```
+
+Nếu Render nhận `render.yaml`, chọn blueprint/web service theo file này. Nếu cấu hình thủ công:
+
+```text
+Root Directory: backend
+Build Command: npm ci --omit=dev
+Start Command: npm start
+```
+
+Environment Variables:
+
+```env
+NODE_ENV=production
+PORT=10000
+MONGODB_URI=mongodb+srv://USER:PASSWORD@CLUSTER/ute-job-platform
+JWT_SECRET=chuoi-bi-mat-that-dai
+JWT_EXPIRE=7d
+FRONTEND_URL=https://jobs.vjec.edu.vn
+```
+
+Sau khi deploy, Render sẽ cho URL dạng:
+
+```text
+https://vjec-hcmute-api.onrender.com
+```
+
+Test:
+
+```text
+https://vjec-hcmute-api.onrender.com/health
+```
+
+### 8.3. Seed dữ liệu mẫu lên Render database
+
+Sau khi Render deploy xong và có MongoDB Atlas URI, chạy seed từ máy local:
+
+```bash
+cd /JOB_WEB/backend
+MONGODB_URI="mongodb+srv://USER:PASSWORD@CLUSTER/ute-job-platform" node src/utils/seed-rich.js
+```
+
+### 8.4. Trỏ frontend Vercel sang Render backend
+
+Vào Vercel project `vjec-hcmute-4eaa`:
+
+```text
+Settings -> Environment Variables
+```
+
+Set:
+
+```env
+VITE_API_URL=https://vjec-hcmute-api.onrender.com/api
+VITE_SOCKET_URL=https://vjec-hcmute-api.onrender.com
+```
+
+Sau đó redeploy frontend hoặc push code mới.
+
+Lưu ý: Render Free có thể sleep khi không có truy cập, request đầu tiên sau khi sleep sẽ chậm hơn bình thường.
