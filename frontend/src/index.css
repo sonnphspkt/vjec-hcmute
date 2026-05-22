@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-slate-50 text-slate-900 antialiased dark:bg-dark-500 dark:text-gray-100;
+  }
+}
+
+@layer components {
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-slate-200 dark:bg-dark-400;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary-500 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary-400;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary-500 to-accent-500 bg-clip-text text-transparent;
+  }
+
+  .glass {
+    @apply bg-white/70 backdrop-blur-lg border border-slate-200/80 shadow-sm dark:bg-white/5 dark:border-white/10 dark:shadow-none;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:transform hover:-translate-y-1 hover:shadow-xl dark:hover:shadow-2xl;
+  }
+
+  /* Form controls — dùng chung cho login/register/profile */
+  .input-field {
+    @apply w-full px-4 py-3 rounded-lg border transition-colors bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-primary-500 dark:bg-dark-400 dark:border-gray-700 dark:text-gray-100 dark:placeholder:text-gray-500;
+  }
+}
